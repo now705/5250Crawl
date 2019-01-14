@@ -24,13 +24,13 @@ namespace Crawl.Views
         {
             InitializeComponent();
 
-            var item = new Item
+            var data = new Item
             {
                 Text = "Item 1",
                 Description = "This is an item description."
             };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new ItemDetailViewModel(data);
             BindingContext = viewModel;
         }
     }

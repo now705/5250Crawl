@@ -12,7 +12,7 @@ namespace Crawl.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public ItemDataStoreInterface<Item> DataStore => DependencyService.Get<ItemDataStoreInterface<Item>>() ?? new ItemDataStoreMock();
 
         bool isBusy = false;
         public bool IsBusy

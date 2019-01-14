@@ -27,11 +27,11 @@ namespace Crawl.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
-            if (item == null)
+            var data = args.SelectedItem as Item;
+            if (data == null)
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(data)));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;
@@ -46,7 +46,7 @@ namespace Crawl.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
+            if (viewModel.DataList.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }
     }

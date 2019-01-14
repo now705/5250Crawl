@@ -6,13 +6,13 @@ using Crawl.Models;
 
 namespace Crawl.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class ItemDataStoreMock : ItemDataStoreInterface<Item>
     {
-        List<Item> items;
+        List<Item> dataList;
 
-        public MockDataStore()
+        public ItemDataStoreMock()
         {
-            items = new List<Item>();
+            dataList = new List<Item>();
             var mockItems = new List<Item>
             {
                 new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
@@ -23,44 +23,44 @@ namespace Crawl.Services
                 new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
             };
 
-            foreach (var item in mockItems)
+            foreach (var data in mockItems)
             {
-                items.Add(item);
+                dataList.Add(data);
             }
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddDataAsync(Item data)
         {
-            items.Add(item);
+            dataList.Add(data);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateDataAsync(Item data)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(oldItem);
-            items.Add(item);
+            var oldItem = dataList.Where((Item arg) => arg.Id == data.Id).FirstOrDefault();
+            dataList.Remove(oldItem);
+            dataList.Add(data);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteDataAsync(string id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
+            var oldItem = dataList.Where((Item arg) => arg.Id == id).FirstOrDefault();
+            dataList.Remove(oldItem);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Item> GetDataAsync(string id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(dataList.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Item>> GetDataListAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(items);
+            return await Task.FromResult(dataList);
         }
     }
 }
