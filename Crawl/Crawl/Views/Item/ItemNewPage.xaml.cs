@@ -11,13 +11,13 @@ namespace Crawl.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemNewPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Item Data { get; set; }
 
         public ItemNewPage()
         {
             InitializeComponent();
 
-            Item = new Item
+            Data = new Item
             {
                 Text = "Item name",
                 Description = "This is an item description."
@@ -28,7 +28,7 @@ namespace Crawl.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "AddItem", Data);
             await Navigation.PopModalAsync();
         }
 
