@@ -12,19 +12,19 @@ namespace Crawl.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<Item> DataList { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            DataList = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             MessagingCenter.Subscribe<ItemNewPage, Item>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item as Item;
-                Items.Add(newItem);
+                DataList.Add(newItem);
                 await DataStore.AddItemAsync(newItem);
             });
         }
@@ -38,11 +38,11 @@ namespace Crawl.ViewModels
 
             try
             {
-                Items.Clear();
+                DataList.Clear();
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
-                    Items.Add(item);
+                    DataList.Add(item);
                 }
             }
             catch (Exception ex)
