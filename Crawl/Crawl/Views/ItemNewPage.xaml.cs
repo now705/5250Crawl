@@ -9,11 +9,11 @@ using Crawl.Models;
 namespace Crawl.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewItemPage : ContentPage
+    public partial class ItemNewPage : ContentPage
     {
         public Item Item { get; set; }
 
-        public NewItemPage()
+        public ItemNewPage()
         {
             InitializeComponent();
 
