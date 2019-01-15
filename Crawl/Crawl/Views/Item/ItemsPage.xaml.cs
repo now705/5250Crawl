@@ -46,7 +46,7 @@ namespace Crawl.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
+            if (viewModel.DataList.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }
     }
