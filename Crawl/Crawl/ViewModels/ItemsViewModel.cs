@@ -39,10 +39,10 @@ namespace Crawl.ViewModels
             try
             {
                 DataList.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                var dataList = await DataStore.GetItemsAsync(true);
+                foreach (var data in dataList)
                 {
-                    DataList.Add(item);
+                    DataList.Add(data);
                 }
             }
             catch (Exception ex)
