@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 
 using Crawl.Views.Battle;
 
-namespace Crawl.Views
+namespace Crawl.Views.Battle
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class OpeningPage : ContentPage
@@ -16,15 +16,5 @@ namespace Crawl.Views
 		{
 			InitializeComponent ();
 		}
-
-        private async void AutoBattleButton_Command(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AutoBattlePage());
-        }
-
-        private async void ManualBattleButton_Command(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AutoBattlePage());
-        }
     }
 }
