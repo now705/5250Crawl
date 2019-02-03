@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Crawl.Views.OpeningPage">
+             x:Class="Crawl.Views.Battle.OpeningPage">
     <ContentPage.Content>
         <StackLayout>
         <StackLayout 
@@ -27,15 +27,6 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <Button Text="AutoBattle"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                    Clicked="AutoBattleButton_Command"/>
-
-            <Button Text="Battle"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                    Clicked="ManualBattleButton_Command"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -2,31 +2,30 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Crawl.Views.AboutPage"
-             xmlns:vm="clr-namespace:Crawl.ViewModels;"
              xmlns:documents="clr-namespace:Windows.UI.Xaml.Documents;assembly=Windows.Foundation.UniversalApiContract"
+             xmlns:vm="clr-namespace:Crawl.ViewModels"
              Title="{Binding Title}">
-
+    
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
 
-    <ScrollView>
-        <StackLayout
-        VerticalOptions="StartAndExpand"
-        HorizontalOptions="CenterAndExpand" 
+    <ScrollView
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand" 
         Orientation="Vertical">
 
-            <StackLayout 
-                VerticalOptions="StartAndExpand"
-                HorizontalOptions="CenterAndExpand" 
+        <StackLayout 
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center" 
                 Orientation="Vertical">
 
-                <StackLayout 
+            <StackLayout 
             HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="StartAndExpand"
+            VerticalOptions="CenterAndExpand"
             Orientation="Vertical">
 
-                    <Image 
+                <Image 
                 Source="d20.png" 
                 VerticalOptions="Center" 
                 HeightRequest="150"
@@ -227,6 +226,5 @@
 
                 </StackLayout>
             </StackLayout>
-    </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -35,7 +35,6 @@ namespace Crawl.ViewModels
 
         public CharactersViewModel()
         {
-
             Title = "Character List";
             Dataset = new ObservableCollection<Character>();
             LoadDataCommand = new Command(async () => await ExecuteLoadDataCommand());
