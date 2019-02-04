@@ -21,6 +21,22 @@ namespace Crawl.GameEngine
         /// <returns></returns>
         public static int RollDice (int rolls, int dice)
         {
+
+            if (rolls < 1)
+            {
+                return 0;
+            }
+
+            if (dice < 1)
+            {
+                return 0;
+            }
+
+            if (Models.GameGlobals.ForceRollsToNotRandom)
+            { 
+                return rolls * Models.GameGlobals.ForcedRandomValue;
+            }
+
             var myReturn = 0;
 
             for (var i = 0; i < rolls; i++)
@@ -31,20 +47,5 @@ namespace Crawl.GameEngine
 
             return myReturn;
         }
-
-        //if (rolls < 1)
-        //{
-        //    return 0;
-        //}
-
-        //if (dice < 1)
-        //{
-        //    return 0;
-        //}
-
-        //if (GameGlobals.ForceRollsToNotRandom)
-        //{
-        //    return GameGlobals.ForcedRandomValue * rolls;
-        //}
     }
 }

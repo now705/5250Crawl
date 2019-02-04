@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameEngine\HelperEngineUnitTests.cs" />
+    <Compile Include="Models\CharacterUnitTests.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
