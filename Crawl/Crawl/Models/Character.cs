@@ -61,34 +61,7 @@ namespace Crawl.Models
         /// <returns>True if New Level Occurs</returns>
         public bool ScaleLevel(int level)
         {
-            // Level of < 1 does not need changing
-            if (level < 1)
-            {
-                return false;
-            }
-
-            // Same level does not need changing
-            if (level == this.Level)
-            {
-                return false;
-            }
-
-            // Don't go down in level...
-            if (level < this.Level)
-            {
-                return false;
-            }
-
-            // Level > Max Level
-            if (level > LevelTable.MaxLevel)
-            {
-                return false;
-            }
-
-            // Calculate Experience Remaining based on Lookup...
-            Level = level;
-
-            Attribute.MaxHealth = HelperEngine.RollDice(Level, HealthDice);
+           // TODO:  Implement Code here...
 
             return true;
         }
