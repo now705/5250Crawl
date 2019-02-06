@@ -13,6 +13,7 @@ namespace Crawl.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AboutPage : ContentPage
     {
+
         public AboutPage()
         {
             InitializeComponent();
@@ -40,6 +41,14 @@ namespace Crawl.Views
             EnableCriticalMissProblems.IsToggled = GameGlobals.EnableCriticalMissProblems;
             EnableCriticalHitDamage.IsToggled = GameGlobals.EnableCriticalHitDamage;
 
+            // Turn off the Debug Frame
+            DebugSettingsFrame.IsVisible = false;
+
+            // Turn off Forced Random Numbers Frame
+            ForcedRandomValuesSettingsFrame.IsVisible = false;
+
+            // Turn off Database Settings Frame
+            DatabaseSettingsFrame.IsVisible = false;
 
             var myTestItem = new Item();
             var myTestCharacter = new Character();
@@ -70,6 +79,11 @@ namespace Crawl.Views
             DebugSettingsFrame.IsVisible = (e.Value);
         }
 
+        private void DatabaseSettingsSwitch_OnToggled(object sender, ToggledEventArgs e)
+        {
+            DatabaseSettingsFrame.IsVisible = (e.Value);
+        }
+
         private void UseMockDataSourceSwitch_OnToggled(object sender, ToggledEventArgs e)
         {
             // This will change out the DataStore to be the Mock Store if toggled on, or the SQL if off.
@@ -78,7 +92,40 @@ namespace Crawl.Views
 
         // Debug Switches
 
-       
+        /// <summary>
+        /// Turn on Random Number Forced Values
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UseForcedRandomValuesSwitch_OnToggled(object sender, ToggledEventArgs e)
+        {
+            if (e.Value)
+            {
+                ForcedRandomValuesSettingsFrame.IsVisible = true;
+                GameGlobals.EnableRandomValues();
+
+                GameGlobals.SetForcedRandomNumbersValue(Convert.ToInt16(ForcedValue.Text));
+            }
+            else
+            {
+                GameGlobals.DisableRandomValues();
+                ForcedRandomValuesSettingsFrame.IsVisible = false;
+            }
+        }
+
+        // The stepper function for Forced Value
+        void ForcedValue_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            ForcedValue.Text = String.Format("{0}", e.NewValue);
+            GameGlobals.SetForcedRandomNumbersValue(Convert.ToInt16(ForcedValue.Text));
+        }
+
+        // The stepper function for To Force To Hit Value
+        void ForcedHitValue_OnStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            ForcedHitValue.Text = String.Format("{0}", e.NewValue);
+        }
+
         // Turn on Critical Misses
         private void EnableCriticalMissProblems_OnToggled(object sender, ToggledEventArgs e)
         {
