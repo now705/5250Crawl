@@ -1,12 +1,8 @@
 ﻿using System;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using Crawl.Models;
 using Crawl.ViewModels;
-// ReSharper disable FieldCanBeMadeReadOnly.Local
-// ReSharper disable RedundantExtendsListEntry
 
 namespace Crawl.Views
 {
