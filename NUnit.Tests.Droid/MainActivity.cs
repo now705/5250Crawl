@@ -1,4 +1,5 @@
-﻿// ***********************************************************************
+﻿using UnitTests;
+// ***********************************************************************
 // Copyright (c) 2017 Charlie Poole
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -26,6 +27,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using NUnit.Runner.Services;
+using System.Reflection;
 
 namespace NUnit.Tests.Droid
 {
@@ -43,6 +45,9 @@ namespace NUnit.Tests.Droid
 
             // If you want to add tests in another assembly
             //nunit.AddTestAssembly(typeof(MyTests).Assembly);
+            nunit.AddTestAssembly(typeof(UnitTests.TestClass).Assembly);
+            nunit.AddTestAssembly(typeof(UnitTests.Models.CharacterUnitTests).Assembly);
+            nunit.AddTestAssembly(typeof(UnitTests.GameEngine.HelperEngineUnitTests).Assembly);
 
             // Available options for testing
             nunit.Options = new TestOptions
