@@ -8,11 +8,10 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <StackLayout>
-
-            <Label Text="Monster List"></Label>
+            <Label Text="Monsters List Page" FontSize="Small" />
 
             <ListView x:Name="DataListView" 
                 ItemsSource="{Binding Dataset}"
@@ -28,18 +27,20 @@
                         <ViewCell>
                             <StackLayout Padding="10">
                                 <Label Text="{Binding Name}" 
-                       LineBreakMode="NoWrap" 
-                       Style="{DynamicResource ListItemTextStyle}" 
-                       FontSize="16" />
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="16" />
+
                                 <Label Text="{Binding Description}" 
-                       LineBreakMode="NoWrap"
-                       Style="{DynamicResource ListItemDetailTextStyle}"
-                       FontSize="13" />
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
+       
     </ContentPage.Content>
 </ContentPage>

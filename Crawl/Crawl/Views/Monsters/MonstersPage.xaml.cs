@@ -17,8 +17,7 @@ namespace Crawl.Views
         public MonstersPage()
         {
             InitializeComponent();
-            //BindingContext = _viewModel = MonstersViewModel.Instance;
-            BindingContext = _viewModel = new MonstersViewModel();
+            BindingContext = _viewModel = MonstersViewModel.Instance;
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
