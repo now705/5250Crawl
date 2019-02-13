@@ -20,7 +20,7 @@ namespace Crawl.Views
             {
                 Name = "Character Name",
                 Description = "This is a Character description.",
-                Level =1,
+                Level = 1,
                 Id = Guid.NewGuid().ToString()
             };
 

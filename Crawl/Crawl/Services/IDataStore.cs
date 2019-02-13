@@ -23,8 +23,22 @@ namespace Crawl.Services
         Task<Item> GetAsync_Item(string id);
         Task<IEnumerable<Item>> GetAllAsync_Item(bool forceRefresh = false);
 
-        // Implement Monster
-        // Implement Character
+        //Character
+        Task<bool> AddAsync_Character(Character character);
+        Task<bool> InsertUpdateAsync_Character(Character item);
+        Task<bool> UpdateAsync_Character(Character character);
+        Task<bool> DeleteAsync_Character(Character id);
+        Task<Character> GetAsync_Character(string id);
+        Task<IEnumerable<Character>> GetAllAsync_Character(bool forceRefresh = false);
+
+        //Monster
+        Task<bool> AddAsync_Monster(Monster monster);
+        Task<bool> InsertUpdateAsync_Monster(Monster item);
+        Task<bool> UpdateAsync_Monster(Monster monster);
+        Task<bool> DeleteAsync_Monster(Monster id);
+        Task<Monster> GetAsync_Monster(string id);
+        Task<IEnumerable<Monster>> GetAllAsync_Monster(bool forceRefresh = false);
+
         // Implement Score
 
     }

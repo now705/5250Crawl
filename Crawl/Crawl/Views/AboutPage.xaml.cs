@@ -62,7 +62,7 @@ namespace Crawl.Views
 
         private void SetDataSource(bool isMock)
         {
-            var set = DataStoreEnum.Sql;
+            var set = DataStoreEnum.SQL;
 
             if (isMock)
             {

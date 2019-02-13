@@ -8,10 +8,10 @@ using Xamarin.Forms.Xaml;
 namespace Crawl.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CharacterEditPage : ContentPage
-	{
-	    // ReSharper disable once NotAccessedField.Local
-	    private CharacterDetailViewModel _viewModel;
+    public partial class CharacterEditPage : ContentPage
+    {
+        // ReSharper disable once NotAccessedField.Local
+        private CharacterDetailViewModel _viewModel;
 
         public Character Data { get; set; }
 
@@ -22,13 +22,13 @@ namespace Crawl.Views
             viewModel.Title = "Edit " + viewModel.Title;
 
             InitializeComponent();
-            
+
 
             // Set the data binding for the page
             BindingContext = _viewModel = viewModel;
         }
 
-	    public async void Save_Clicked(object sender, EventArgs e)
+        public async void Save_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "EditData", Data);
 
@@ -42,7 +42,7 @@ namespace Crawl.Views
             Navigation.RemovePage(this);
         }
 
-	    private async void Cancel_Clicked(object sender, EventArgs e)
+        private async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }

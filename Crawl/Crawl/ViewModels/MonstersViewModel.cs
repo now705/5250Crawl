@@ -39,64 +39,80 @@ namespace Crawl.ViewModels
             Dataset = new ObservableCollection<Monster>();
             LoadDataCommand = new Command(async () => await ExecuteLoadDataCommand());
 
-            // Implement 
+            MessagingCenter.Subscribe<MonsterDeletePage, Monster>(this, "DeleteData", async (obj, data) =>
+            {
+                Dataset.Remove(data);
+                await DataStore.DeleteAsync_Monster(data);
+            });
+
+            MessagingCenter.Subscribe<MonsterNewPage, Monster>(this, "AddData", async (obj, data) =>
+            {
+                Dataset.Add(data);
+                await DataStore.AddAsync_Monster(data);
+            });
+
+            MessagingCenter.Subscribe<MonsterEditPage, Monster>(this, "EditData", async (obj, data) =>
+            {
+                // Find the Monster, then update it
+                var myData = Dataset.FirstOrDefault(arg => arg.Id == data.Id);
+                if (myData == null)
+                {
+                    return;
+                }
+
+                myData.Update(data);
+                await DataStore.UpdateAsync_Monster(myData);
+
+                _needsRefresh = true;
+
+            });
         }
 
         // Return True if a refresh is needed
         // It sets the refresh flag to false
         public bool NeedsRefresh()
         {
-            // Implement 
-            return false;
+            if (!_needsRefresh)
+            {
+                return false;
+            }
+
+            _needsRefresh = false;
+            return true;
         }
 
         // Sets the need to refresh
         public void SetNeedsRefresh(bool value)
         {
-            // Implement 
-
+            _needsRefresh = value;
         }
 
         private async Task ExecuteLoadDataCommand()
         {
-            // Implement 
-            return;
+            if (IsBusy)
+            {
+                return;
+            }
 
+            IsBusy = true;
+
+            try
+            {
+                Dataset.Clear();
+                var dataset = await DataStore.GetAllAsync_Monster(true);
+                foreach (var data in dataset)
+                {
+                    Dataset.Add(data);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
-        
-        public void ForceDataRefresh()
-        {
-            // Implement 
-        }
-
-        #region DataOperations
-
-        public async Task<bool> AddAsync(Monster data)
-        {
-            // Implement 
-            return false;
-        }
-
-        public async Task<bool> DeleteAsync(Monster data)
-        {
-            // Implement 
-            return false;
-        }
-
-        public async Task<bool> UpdateAsync(Monster data)
-        {
-            // Implement 
-            return false;
-        }
-
-        // Call to database to ensure most recent
-        public async Task<Monster> GetAsync(string id)
-        {
-            // Implement 
-            return null;
-        }
-
-        #endregion DataOperations
-
     }
 }

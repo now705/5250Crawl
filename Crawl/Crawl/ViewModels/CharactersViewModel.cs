@@ -35,67 +35,83 @@ namespace Crawl.ViewModels
 
         public CharactersViewModel()
         {
+
             Title = "Character List";
             Dataset = new ObservableCollection<Character>();
             LoadDataCommand = new Command(async () => await ExecuteLoadDataCommand());
 
-            // Implement 
+            MessagingCenter.Subscribe<CharacterDeletePage, Character>(this, "DeleteData", async (obj, data) =>
+            {
+                Dataset.Remove(data);
+                await DataStore.DeleteAsync_Character(data);
+            });
 
+            MessagingCenter.Subscribe<CharacterNewPage, Character>(this, "AddData", async (obj, data) =>
+            {
+                Dataset.Add(data);
+                await DataStore.AddAsync_Character(data);
+            });
+
+            MessagingCenter.Subscribe<CharacterEditPage, Character>(this, "EditData", async (obj, data) =>
+            {
+
+                // Find the Item, then update it
+                var myData = Dataset.FirstOrDefault(arg => arg.Id == data.Id);
+                if (myData == null)
+                {
+                    return;
+                }
+
+                myData.Update(data);
+                await DataStore.UpdateAsync_Character(data);
+
+                _needsRefresh = true;
+
+            });
         }
 
         // Return True if a refresh is needed
         // It sets the refresh flag to false
         public bool NeedsRefresh()
         {
-            // Implement 
+            if (_needsRefresh)
+            {
+                _needsRefresh = false;
+                return true;
+            }
             return false;
         }
 
         // Sets the need to refresh
         public void SetNeedsRefresh(bool value)
         {
-            // Implement 
+            _needsRefresh = value;
         }
 
         private async Task ExecuteLoadDataCommand()
         {
-            // Implement 
-            return;
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+
+            try
+            {
+                Dataset.Clear();
+                var dataset = await DataStore.GetAllAsync_Character(true);
+                foreach (var data in dataset)
+                {
+                    Dataset.Add(data);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
-
-        public void ForceDataRefresh()
-        {
-            // Implement 
-        }
-
-        #region DataOperations
-
-        public async Task<bool> AddAsync(Character data)
-        {
-            // Implement 
-            return false;
-        }
-
-        public async Task<bool> DeleteAsync(Character data)
-        {
-            // Implement 
-            return false;
-        }
-
-        public async Task<bool> UpdateAsync(Character data)
-        {
-            // Implement 
-            return false;
-        }
-
-        // Call to database to ensure most recent
-        public async Task<Character> GetAsync(string id)
-        {
-            // Implement 
-            return null;
-        }
-
-        #endregion DataOperations
-
     }
 }
