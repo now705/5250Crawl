@@ -70,13 +70,17 @@ namespace Crawl.Services
 
         private async void InitilizeSeedData()
         {
-            await AddAsync_Item(new Item { Id = Guid.NewGuid().ToString(), Name = "SQL First item", Description = "This is an item description." });
-            await AddAsync_Item(new Item { Id = Guid.NewGuid().ToString(), Name = "SQL Second item", Description = "This is an item description." });
-            await AddAsync_Item(new Item { Id = Guid.NewGuid().ToString(), Name = "SQL Third item", Description = "This is an item description." });
-            await AddAsync_Item(new Item { Id = Guid.NewGuid().ToString(), Name = "SQL Fourth item", Description = "This is an item description." });
-            await AddAsync_Item(new Item { Id = Guid.NewGuid().ToString(), Name = "SQL Fifth item", Description = "This is an item description." });
-            await AddAsync_Item(new Item { Id = Guid.NewGuid().ToString(), Name = "SQL Sixth item", Description = "This is an item description." });
+            // Load Items.
+            await AddAsync_Item(new Item("SQL Gold Sword", "Sword made of Gold, really expensive looking",
+                "http://www.clker.com/cliparts/e/L/A/m/I/c/sword-md.png", 0, 10, 10, ItemLocationEnum.PrimaryHand, AttributeEnum.Defense));
 
+            await AddAsync_Item(new Item("SQL Strong Shield", "Enough to hide behind",
+                "http://www.clipartbest.com/cliparts/4T9/LaR/4T9LaReTE.png", 0, 10, 0, ItemLocationEnum.OffHand, AttributeEnum.Attack));
+
+            await AddAsync_Item(new Item("SQL Bunny Hat", "Pink hat with fluffy ears",
+                "http://www.clipartbest.com/cliparts/yik/e9k/yike9kMyT.png", 0, 10, -1, ItemLocationEnum.Head, AttributeEnum.Speed));
+
+            // Implement Characters
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL First Character", Description = "This is an Character description.", Level = 1 });
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL Second Character", Description = "This is an Character description.", Level = 1 });
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL Third Character", Description = "This is an Character description.", Level = 2 });
@@ -84,6 +88,7 @@ namespace Crawl.Services
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL Fifth Character", Description = "This is an Character description.", Level = 3 });
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL Sixth Character", Description = "This is an Character description.", Level = 3 });
 
+            // Implement Monsters
             await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "SQL First Monster", Description = "This is an Monster description." });
             await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "SQL Second Monster", Description = "This is an Monster description." });
             await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "SQL Third Monster", Description = "This is an Monster description." });

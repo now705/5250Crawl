@@ -35,26 +35,39 @@ namespace Crawl.Services
             InitilizeSeedData();
         }
 
-        private void InitilizeSeedData()
+        private async void InitilizeSeedData()
         {
 
             // Implement
 
             // Load Items.
-            _itemDataset.Add(new Item("Gold Sword", "Sword made of Gold, really expensive looking",
+            await AddAsync_Item(new Item("Mock Gold Sword", "Sword made of Gold, really expensive looking",
                 "http://www.clker.com/cliparts/e/L/A/m/I/c/sword-md.png", 0, 10, 10, ItemLocationEnum.PrimaryHand, AttributeEnum.Defense));
 
-            _itemDataset.Add(new Item("Strong Shield", "Enough to hide behind",
+            await AddAsync_Item(new Item("Mock Strong Shield", "Enough to hide behind",
                 "http://www.clipartbest.com/cliparts/4T9/LaR/4T9LaReTE.png", 0, 10, 0, ItemLocationEnum.OffHand, AttributeEnum.Attack));
 
-            _itemDataset.Add(new Item("Bunny Hat", "Pink hat with fluffy ears",
+            await AddAsync_Item(new Item("Mock Bunny Hat", "Pink hat with fluffy ears",
                 "http://www.clipartbest.com/cliparts/yik/e9k/yike9kMyT.png", 0, 10, -1, ItemLocationEnum.Head, AttributeEnum.Speed));
 
             // Implement Characters
+            await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "Mock First Character", Description = "This is an Character description.", Level = 1 });
+            await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "Mock Second Character", Description = "This is an Character description.", Level = 1 });
+            await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "Mock Third Character", Description = "This is an Character description.", Level = 2 });
+            await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "Mock Fourth Character", Description = "This is an Character description.", Level = 2 });
+            await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "Mock Fifth Character", Description = "This is an Character description.", Level = 3 });
+            await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "Mock Sixth Character", Description = "This is an Character description.", Level = 3 });
 
             // Implement Monsters
+            await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "Mock First Monster", Description = "This is an Monster description." });
+            await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "Mock Second Monster", Description = "This is an Monster description." });
+            await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "Mock Third Monster", Description = "This is an Monster description." });
+            await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "Mock Fourth Monster", Description = "This is an Monster description." });
+            await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "Mock Fifth Monster", Description = "This is an Monster description." });
+            await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "Mock Sixth Monster", Description = "This is an Monster description." });
 
             // Implement Scores
+
         }
 
         private void CreateTables()
