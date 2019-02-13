@@ -4,6 +4,7 @@
              x:Class="Crawl.Views.CharactersPage"
               Title="{Binding Title}"
              x:Name="BrowseCharactersPage">
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
