@@ -8,10 +8,10 @@ using Xamarin.Forms.Xaml;
 namespace Crawl.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MonsterDeletePage : ContentPage
-	{
-	    // ReSharper disable once NotAccessedField.Local
-	    private MonsterDetailViewModel _viewModel;
+    public partial class MonsterDeletePage : ContentPage
+    {
+        // ReSharper disable once NotAccessedField.Local
+        private MonsterDetailViewModel _viewModel;
 
         public Monster Data { get; set; }
 
@@ -27,8 +27,10 @@ namespace Crawl.Views
             BindingContext = _viewModel = viewModel;
         }
 
-	    private async void Delete_Clicked(object sender, EventArgs e)
+        private async void Delete_Clicked(object sender, EventArgs e)
         {
+
+            // Monster data = new Monster();
             MessagingCenter.Send(this, "DeleteData", Data);
 
             // Remove Item Details Page manualy
@@ -37,7 +39,7 @@ namespace Crawl.Views
             await Navigation.PopAsync();
         }
 
-	    private async void Cancel_Clicked(object sender, EventArgs e)
+        private async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }

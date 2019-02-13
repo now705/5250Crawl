@@ -28,8 +28,8 @@ namespace Crawl.Views
 
             var data = new Monster
             {
-                Name = "Item 1",
-                Description = "This is an item description."
+                Name = "Monster 1",
+                Description = "This is a description."
             };
 
             _viewModel = new MonsterDetailViewModel(data);

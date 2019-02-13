@@ -23,6 +23,7 @@ namespace Crawl.Views
             {
                 new HomeMenuItem {Id = MenuItemType.Home, Title="Home"},
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" },
+                new HomeMenuItem {Id = MenuItemType.Monsters, Title="Monsters"},
                 new HomeMenuItem {Id = MenuItemType.Characters, Title="Characters"},
                 new HomeMenuItem {Id = MenuItemType.Items, Title="Items"},
                 new HomeMenuItem {Id = MenuItemType.Score, Title = "History"}
