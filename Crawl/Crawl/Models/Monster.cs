@@ -31,15 +31,27 @@ namespace Crawl.Models
         // Passed in from creating via the Database, so use the guid passed in...
         public Monster(BaseMonster newData)
         {
-            // Implement
+            if (newData == null)
+            {
+                return;
+            }
 
+            // Update all the fields in the Data, except for the Id
+            Name = newData.Name;
+            Description = newData.Description;
         }
 
         // For making a new one for lists etc..
         public Monster(Monster newData)
         {
-            // Implement
+            if (newData == null)
+            {
+                return;
+            }
 
+            // Update all the fields in the Data, except for the Id
+            Name = newData.Name;
+            Description = newData.Description;
         }
 
         // Upgrades a monster to a set level
@@ -51,7 +63,14 @@ namespace Crawl.Models
         // Update the values passed in
         public new void Update(Monster newData)
         {
-            // Implement
+            if (newData == null)
+            {
+                return;
+            }
+
+            // Update all the fields in the Data, except for the Id
+            Name = newData.Name;
+            Description = newData.Description;
 
             return;
         }
