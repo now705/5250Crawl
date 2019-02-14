@@ -175,7 +175,8 @@ namespace Crawl.Views
             var random = true;  // Random between 1 and Level
             var updateDataBase = true;  // Add them to the DB
 
-            // GetItemsFromGame(1,10,Speed,Feet,false,true) will return shoes value 10 of speed.
+            // will return shoes value 10 of speed.
+            await ItemsController.Instance.GetItemsFromGame(1, 10, AttributeEnum.Speed, ItemLocationEnum.Feet, false, true);
 
             var myDataList = new List<Item>();
 
