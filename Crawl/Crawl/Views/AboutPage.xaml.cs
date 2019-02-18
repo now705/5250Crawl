@@ -13,10 +13,13 @@ namespace Crawl.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AboutPage : ContentPage
     {
+        private AboutViewModel _viewModel = new AboutViewModel();
 
         public AboutPage()
         {
             InitializeComponent();
+
+            BindingContext = _viewModel;
 
             // Set the flag for Mock on or off...
             UseMockDataSource.IsToggled = (MasterDataStore.GetDataStoreMockFlag() == DataStoreEnum.Mock);
@@ -57,7 +60,6 @@ namespace Crawl.Views
             var myOutputItem = myTestItem.FormatOutput();
             var myOutputCharacter = myTestCharacter.FormatOutput();
             var myOutputMonster = myTestMonster.FormatOutput();
-
         }
 
         private void SetDataSource(bool isMock)
@@ -160,7 +162,10 @@ namespace Crawl.Views
             if (answer)
             {
                 // Call to the Item Service and have it Get the Items
-                
+                // The ServerItemValue Code stands for the batch of items to get
+                // as the group to request.  1, 2, 3, 100 (All), or if not specified All
+                var count = Convert.ToInt32(ServerItemValue.Text);
+                ItemsController.Instance.GetItemsFromServer(count);
             }
         }
 
