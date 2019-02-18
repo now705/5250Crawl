@@ -30,7 +30,7 @@ namespace Crawl.Controllers
         public static string DefaultImageURI = "Item.png";
 
         #region ServerCalls
-        public async void GetItemsFromServer(int parameter = 100)
+        public async Task<List<Item>> GetItemsFromServer(int parameter = 100)
         {
             // parameter is the item group to request.  1, 2, 3, 100
 
@@ -52,7 +52,7 @@ namespace Crawl.Controllers
             if (myList == null)
             {
                 // Error, no results
-                return;
+                return null;
             }
 
             // Then update the database
@@ -66,6 +66,8 @@ namespace Crawl.Controllers
 
             // When foreach is done, call to the items view model to set needs refresh to true, so it can refetch the list...
             ItemsViewModel.Instance.SetNeedsRefresh(true);
+
+            return myList;
         }
 
         // Asks the server for items based on paramaters

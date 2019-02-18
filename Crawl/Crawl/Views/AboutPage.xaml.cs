@@ -165,7 +165,23 @@ namespace Crawl.Views
                 // The ServerItemValue Code stands for the batch of items to get
                 // as the group to request.  1, 2, 3, 100 (All), or if not specified All
                 var count = Convert.ToInt32(ServerItemValue.Text);
-                ItemsController.Instance.GetItemsFromServer(count);
+                var myDataList = await ItemsController.Instance.GetItemsFromServer(count);
+
+                var myOutput = "No Results";
+
+                if (myDataList != null && myDataList.Count > 0)
+                {
+                    // Reset the output
+                    myOutput = "";
+
+                    foreach (var item in myDataList)
+                    {
+                        // Add them line by one, use \n to force new line for output display.
+                        myOutput += item.FormatOutput() + "\n";
+                    }
+                }
+
+                await DisplayAlert("Returned List", myOutput,"OK");
             }
         }
 
@@ -173,7 +189,7 @@ namespace Crawl.Views
         {
             //ItemsController.Instance.GetItemsFromGame(int number, int level, AttributeEnum attribute, ItemLocationEnum location, bool random, bool updateDataBase)
 
-            var number = 10;    // 10 items
+            var number = Convert.ToInt32(ServerItemValue.Text);
             var level = 6;  // Max Value of 6
             var attribute = AttributeEnum.Unknown;  // Any Attribute
             var location = ItemLocationEnum.Unknown;    // Any Location
@@ -181,9 +197,9 @@ namespace Crawl.Views
             var updateDataBase = true;  // Add them to the DB
 
             // will return shoes value 10 of speed.
-            await ItemsController.Instance.GetItemsFromGame(1, 10, AttributeEnum.Speed, ItemLocationEnum.Feet, false, true);
+            // await ItemsController.Instance.GetItemsFromGame(1, 10, AttributeEnum.Speed, ItemLocationEnum.Feet, false, true);
 
-            var myDataList = new List<Item>();
+            var myDataList = await ItemsController.Instance.GetItemsFromGame(number, level, attribute, location, random, updateDataBase);
 
             var myOutput = "No Results";
 
@@ -199,7 +215,7 @@ namespace Crawl.Views
                 }
             }
 
-            var answer = await DisplayAlert("Returned List", myOutput, "Yes", "No");
+            await DisplayAlert("Returned List", myOutput, "OK");
         }
 
     }
