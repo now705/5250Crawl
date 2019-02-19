@@ -43,17 +43,52 @@ namespace Crawl.Models
         // Instantiate new Score
         public Score()
         {
-            // Implement
+            GameDate = DateTime.Now;    // Set to be now by default.
+            AutoBattle = false;         //assume user battle
 
+            CharacterAtDeathList = null;
+            MonstersKilledList = null;
+            ItemsDroppedList = null;
+
+            TurnCount = 0;
+            RoundCount = 0;
+            ExperienceGainedTotal = 0;
+            MonsterSlainNumber = 0;
+        }
+
+        /// <summary>
+        /// Constructor for loading score from SQL
+        /// Takes a Score and make a scopy of it.
+        /// </summary>
+        /// <param name="data"></param>
+        public Score(Score data)
+        {
+            Update(data);
         }
 
         // Update the score based on the passed in values.
         public void Update(Score newData)
         {
-            // Implement
-
+            if (newData == null)
+            {
                 return;
-            
+            }
+
+            // Update all the fields in the Data, except for the Id
+            Name = newData.Name;
+            Description = newData.Description;
+
+            BattleNumber = newData.BattleNumber;
+            ScoreTotal = newData.ScoreTotal;
+            GameDate = newData.GameDate;
+            AutoBattle = newData.AutoBattle;
+            TurnCount = newData.TurnCount;
+            RoundCount = newData.RoundCount;
+            MonsterSlainNumber = newData.MonsterSlainNumber;
+            ExperienceGainedTotal = newData.ExperienceGainedTotal;
+            CharacterAtDeathList = newData.CharacterAtDeathList;
+            MonstersKilledList = newData.MonstersKilledList;
+            ItemsDroppedList = newData.ItemsDroppedList;
         }
 
         #region ScoreItems
@@ -61,24 +96,37 @@ namespace Crawl.Models
         // Adding a character to the score output as a text string
         public bool AddCharacterToList( Character data)
         {
-            // Implement
-            return false;
+            if (data == null)
+            {
+                return false;
+            }
+
+            CharacterAtDeathList += data.FormatOutput() + "\n";
+            return true;
         }
 
         // All a monster to the list of monsters and their stats
         public bool AddMonsterToList( Monster data)
         {
-            // Implement
-            return false;
-           
+            if (data == null)
+            {
+                return false;
+            }
+
+            MonstersKilledList += data.FormatOutput() + "\n";
+            return true;
         }
 
         // All an item to the list of items for score and their stats
         public bool AddItemToList( Item data)
         {
-            // Implement
-            return false;
+            if (data == null)
+            {
+                return false;
+            }
 
+            ItemsDroppedList += data.FormatOutput() + "\n";
+            return true;
         }
         #endregion ScoreItems
     }

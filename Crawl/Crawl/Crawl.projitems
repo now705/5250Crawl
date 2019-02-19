@@ -55,7 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\LevelTable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\BaseMonster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Round.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Turn.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Enums\HitStatusEnum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Item.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ItemLocation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Monster.cs" />
@@ -272,6 +272,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Models\Enums\" />
   </ItemGroup>
   <!--#if (CreateBackendProject)
     <Compile Include="$(MSBuildThisFileDirectory)Services\AzureDataStore.cs" />

@@ -30,7 +30,7 @@ namespace Crawl.Controllers
         public static string DefaultImageURI = "Item.png";
 
         #region ServerCalls
-        public async Task<List<Item>> GetItemsFromServer(int parameter = 100)
+        public async void GetItemsFromServer(int parameter = 100)
         {
             // parameter is the item group to request.  1, 2, 3, 100
 
@@ -43,7 +43,7 @@ namespace Crawl.Controllers
 
             // Needs to get items from the server
 
-            var URLComponent = "GetItemList/";
+            var URLComponent = "GetItemListPost/";
 
             var DataResult = await HttpClientService.Instance.GetJsonGetAsync(WebGlobals.WebSiteAPIURL + URLComponent + parameter);
 
@@ -52,7 +52,7 @@ namespace Crawl.Controllers
             if (myList == null)
             {
                 // Error, no results
-                return null;
+                return;
             }
 
             // Then update the database
@@ -66,12 +66,10 @@ namespace Crawl.Controllers
 
             // When foreach is done, call to the items view model to set needs refresh to true, so it can refetch the list...
             ItemsViewModel.Instance.SetNeedsRefresh(true);
-
-            return myList;
         }
 
         // Asks the server for items based on paramaters
-        // Number is the number of items to return
+        // Number is th enumber of items to return
         // Level is the Value max for the items
         // Random is to have the value random between 1 and the Level
         // Attribute is a filter to return only items for that attribute, else unknown is used for any

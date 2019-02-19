@@ -1,6 +1,4 @@
 ﻿using System;
-using SQLite;
-using Crawl.Controllers;
 using Crawl.ViewModels;
 using System.Collections.Generic;
 
@@ -25,39 +23,70 @@ namespace Crawl.Models
             Level = 1;
 
             // Scale up to the level
-            // // Implement ScaleLevel(Level);
+            ScaleLevel(Level);
         }
 
         // Passed in from creating via the Database, so use the guid passed in...
-        public Monster(BaseMonster newData)
+        public Monster (BaseMonster newData)
         {
-            if (newData == null)
-            {
-                return;
-            }
+            // Database information
+            Guid = newData.Guid;
+            Id = newData.Id;
 
-            // Update all the fields in the Data, except for the Id
+            // Set the strings for the items
+            Head = newData.Head;
+            Feet = newData.Feet;
+            Necklass = newData.Necklass;
+            RightFinger = newData.RightFinger;
+            LeftFinger = newData.LeftFinger;
+            Feet = newData.Feet;
+
             Name = newData.Name;
             Description = newData.Description;
+            ImageURI = newData.ImageURI;
+            Alive = newData.Alive;
+
+            Level = newData.Level;
+
+            // Populate the Attributes
+            Attribute = new AttributeBase(newData.AttributeString);
+
+            // Scale up to the level
+            ScaleLevel(Level);
         }
 
         // For making a new one for lists etc..
         public Monster(Monster newData)
         {
-            if (newData == null)
-            {
-                return;
-            }
+            // Use auto generated guid from entity constructor...
+            //Guid = newData.Guid;
+            //Id = newData.Id;
 
-            // Update all the fields in the Data, except for the Id
-            Name = newData.Name;
-            Description = newData.Description;
+            // Set the strings for the items
+            Update(newData);
+
+            // Scale up to the level
+            ScaleLevel(Level);
         }
 
         // Upgrades a monster to a set level
         public void ScaleLevel(int level)
         {
-            // Implement
+            // Calculate Experience Remaining based on Lookup...
+            Level = level;
+
+            // Get the number of points at the next level, and set it for Experience Total...
+            ExperienceTotal = LevelTable.Instance.LevelDetailsList[Level+1].Experience;
+            ExperienceRemaining = ExperienceTotal;
+
+            Damage = GetLevelBasedDamage() + LevelTable.Instance.LevelDetailsList[Level].Attack;
+            Attribute.Attack = LevelTable.Instance.LevelDetailsList[Level].Attack;
+            Attribute.Defense = LevelTable.Instance.LevelDetailsList[Level].Defense;
+            Attribute.Speed = LevelTable.Instance.LevelDetailsList[Level].Speed;
+            Attribute.MaxHealth = 5 * Level;    // 1/2 of what Characters can get per level.. 
+            Attribute.CurrentHealth = Attribute.MaxHealth;
+
+            AttributeString = AttributeBase.GetAttributeString(Attribute);
         }
 
         // Update the values passed in
@@ -71,21 +100,51 @@ namespace Crawl.Models
             // Update all the fields in the Data, except for the Id
             Name = newData.Name;
             Description = newData.Description;
+            Level = newData.Level;
+            ExperienceTotal = newData.ExperienceTotal;
+            ImageURI = newData.ImageURI;
+            Alive = newData.Alive;
 
-            return;
+            // Database information
+            Guid = newData.Guid;
+            Id = newData.Id;
+
+            // Populate the Attributes
+            AttributeString = newData.AttributeString;
+            Attribute = new AttributeBase(newData.AttributeString);
+
+            // Set the strings for the items
+            Head = newData.Head;
+            Feet = newData.Feet;
+            Necklass = newData.Necklass;
+            RightFinger = newData.RightFinger;
+            LeftFinger = newData.LeftFinger;
+            Feet = newData.Feet;
+            UniqueItem = newData.UniqueItem;
+
+            // Calculate Experience Remaining based on Lookup...
+            ExperienceTotal = newData.ExperienceTotal;
+            ExperienceRemaining = newData.ExperienceRemaining;
+
+            Damage = newData.Damage;
         }
 
         // Helper to combine the attributes into a single line, to make it easier to display the item as a string
         public string FormatOutput()
         {
-            var UniqueOutput = "Implement";
+            var UniqueOutput = "None";
+            var myUnique = ItemsViewModel.Instance.GetItem(UniqueItem);
+            if (myUnique != null)
+            {
+                UniqueOutput = myUnique.FormatOutput();
+            }
 
-            var myReturn = "Implement";
-
-            // Implement
-
+            var myReturn = Name;
+            myReturn += " , " + Description;
+            myReturn += " , Level : " + Level.ToString();
+            myReturn += " , Total Experience : " + ExperienceTotal;
             myReturn += " , Unique Item : " + UniqueOutput;
-
+            
             return myReturn;
         }
 
@@ -94,9 +153,30 @@ namespace Crawl.Models
         // Needs to be called before applying damage
         public int CalculateExperienceEarned(int damage)
         {
-            // Implement
-            return 0;
+            if (damage < 1)
+            {
+                return 0;
+            }
 
+            int remainingHealth = Math.Max(Attribute.CurrentHealth - damage,0); // Go to 0 is OK...
+            double rawPercent = (double)remainingHealth / (double)Attribute.CurrentHealth;
+            double deltaPercent = 1- rawPercent;
+            var pointsAllocate = (int)Math.Floor(ExperienceRemaining * deltaPercent);
+
+            // Catch rounding of low values, and force to 1.
+            if (pointsAllocate <1)
+            {
+                pointsAllocate = 1;
+            }
+
+            // Take away the points from remaining experience
+            ExperienceRemaining -= pointsAllocate;
+            if (ExperienceRemaining < 0)
+            {
+                pointsAllocate = 0;
+            }
+
+            return pointsAllocate;
         }
 
         #region GetAttributes
@@ -151,9 +231,9 @@ namespace Crawl.Models
         // Then add in the monster damage
         public int GetDamage()
         {
-            var myReturn = 0;
+            var myReturn = 0; // = GetLevelBasedDamage();  BaseDamage Already calculated in
             myReturn += Damage;
-
+                
             return myReturn;
         }
 
@@ -183,8 +263,11 @@ namespace Crawl.Models
             // Drop all Items
             Item myItem;
 
-            // Implement
-
+            myItem = ItemsViewModel.Instance.GetItem(UniqueItem);
+            if (myItem != null)
+            {
+                myReturn.Add(myItem);
+            }
             return myReturn;
         }
 
@@ -196,10 +279,18 @@ namespace Crawl.Models
         // monsters give experience to characters.  Characters don't accept expereince from monsters
         public void TakeDamage(int damage)
         {
-            // Implement
-            return;
+            if (damage <= 0)
+            {
+                return;
+            }
 
-            // Implement   CauseDeath();
+            Attribute.CurrentHealth = Attribute.CurrentHealth - damage;
+            if (Attribute.CurrentHealth <= 0)
+            {
+                Attribute.CurrentHealth = 0;
+                // Death...
+                CauseDeath();
+            }
         }
     }
 }

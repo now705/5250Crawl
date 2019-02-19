@@ -29,7 +29,7 @@ using Android.OS;
 using NUnit.Runner.Services;
 using System.Reflection;
 
-namespace NUnit.Tests.Droid
+namespace UnitTests.Droid
 {
     [Activity(Label = "NUnit", Icon = "@drawable/icon", Theme = "@android:style/Theme.Holo.Light", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity

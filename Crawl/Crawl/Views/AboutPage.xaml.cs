@@ -158,16 +158,18 @@ namespace Crawl.Views
 
         private async void GetItems_Command(object sender, EventArgs e)
         {
+            var myOutput = "No Results";
+            var myDataList = new List<Item>();
+
             var answer = await DisplayAlert("Get", "Sure you want to Get Items from the Server?", "Yes", "No");
             if (answer)
             {
                 // Call to the Item Service and have it Get the Items
                 // The ServerItemValue Code stands for the batch of items to get
                 // as the group to request.  1, 2, 3, 100 (All), or if not specified All
-                var count = Convert.ToInt32(ServerItemValue.Text);
-                var myDataList = await ItemsController.Instance.GetItemsFromServer(count);
 
-                var myOutput = "No Results";
+                // 1. Take the value from ServerItemValue.Text, Convert to an ToInt32 and save it in a variable
+                // 2. set myDataList = await ItemsController.Instance.GetItemsFromServer passing the variable
 
                 if (myDataList != null && myDataList.Count > 0)
                 {
@@ -177,6 +179,7 @@ namespace Crawl.Views
                     foreach (var item in myDataList)
                     {
                         // Add them line by one, use \n to force new line for output display.
+                        // Build up the output string by adding formatted Item Output
                         myOutput += item.FormatOutput() + "\n";
                     }
                 }
@@ -187,7 +190,8 @@ namespace Crawl.Views
 
         private async void GetItemsPost_Command(object sender, EventArgs e)
         {
-            //ItemsController.Instance.GetItemsFromGame(int number, int level, AttributeEnum attribute, ItemLocationEnum location, bool random, bool updateDataBase)
+            var myOutput = "No Results";
+            var myDataList = new List<Item>();
 
             var number = Convert.ToInt32(ServerItemValue.Text);
             var level = 6;  // Max Value of 6
@@ -197,11 +201,8 @@ namespace Crawl.Views
             var updateDataBase = true;  // Add them to the DB
 
             // will return shoes value 10 of speed.
-            // await ItemsController.Instance.GetItemsFromGame(1, 10, AttributeEnum.Speed, ItemLocationEnum.Feet, false, true);
-
-            var myDataList = await ItemsController.Instance.GetItemsFromGame(number, level, attribute, location, random, updateDataBase);
-
-            var myOutput = "No Results";
+            // Example  result = await ItemsController.Instance.GetItemsFromGame(1, 10, AttributeEnum.Speed, ItemLocationEnum.Feet, false, true);
+            myDataList = await ItemsController.Instance.GetItemsFromGame(number, level, attribute, location, random, updateDataBase);
 
             if (myDataList != null && myDataList.Count > 0)
             {

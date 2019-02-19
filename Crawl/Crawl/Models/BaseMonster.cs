@@ -1,9 +1,4 @@
-﻿using System;
-using SQLite;
-using Crawl.Controllers;
-using Crawl.ViewModels;
-
-namespace Crawl.Models
+﻿namespace Crawl.Models
 {
     public class BaseMonster : BasePlayer<BaseMonster>
     {
@@ -28,6 +23,18 @@ namespace Crawl.Models
             Guid = newData.Guid;
             Id = newData.Id;
 
+            Update(newData);
+
+        }
+
+        // So when working with the database, pass Monster
+        public void Update(Monster newData)
+        {
+            if (newData == null)
+            {
+                return;
+            }
+
             Name = newData.Name;
             Description = newData.Description;
             Level = newData.Level;
@@ -51,12 +58,7 @@ namespace Crawl.Models
             ExperienceTotal = LevelTable.Instance.LevelDetailsList[Level].Experience;
 
             Damage = newData.Damage;
-        }
-
-        // So when working with the database, pass Character
-        public void Update(Monster newData)
-        {
-                return;
+            return;
         }
     }
 }

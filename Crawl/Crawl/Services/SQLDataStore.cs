@@ -80,7 +80,7 @@ namespace Crawl.Services
             await AddAsync_Item(new Item("SQL Bunny Hat", "Pink hat with fluffy ears",
                 "http://www.clipartbest.com/cliparts/yik/e9k/yike9kMyT.png", 0, 10, -1, ItemLocationEnum.Head, AttributeEnum.Speed));
 
-            // Implement Characters
+            // Characters
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL First Character", Description = "This is an Character description.", Level = 1 });
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL Second Character", Description = "This is an Character description.", Level = 1 });
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL Third Character", Description = "This is an Character description.", Level = 2 });
@@ -88,7 +88,7 @@ namespace Crawl.Services
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL Fifth Character", Description = "This is an Character description.", Level = 3 });
             await AddAsync_Character(new Character { Id = Guid.NewGuid().ToString(), Name = "SQL Sixth Character", Description = "This is an Character description.", Level = 3 });
 
-            // Implement Monsters
+            // Monsters
             await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "SQL First Monster", Description = "This is an Monster description." });
             await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "SQL Second Monster", Description = "This is an Monster description." });
             await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "SQL Third Monster", Description = "This is an Monster description." });
@@ -96,12 +96,12 @@ namespace Crawl.Services
             await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "SQL Fifth Monster", Description = "This is an Monster description." });
             await AddAsync_Monster(new Monster { Id = Guid.NewGuid().ToString(), Name = "SQL Sixth Monster", Description = "This is an Monster description." });
 
-            //await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), NameBogus = "First Score", ScoreTotal = 111 });
-            //await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), NameBogus = "Second Score", ScoreTotal = 222 });
-            //await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), NameBogus = "Third Score", ScoreTotal = 333 });
-            //await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), NameBogus = "Fourth Score", ScoreTotal = 444 });
-            //await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), NameBogus = "Fifth Score", ScoreTotal = 555 });
-            //await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), NameBogus = "Sixth Score", ScoreTotal = 666 });
+            await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), Name = "SQL First Score", ScoreTotal = 111 });
+            await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), Name = "SQL Second Score", ScoreTotal = 222 });
+            await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), Name = "SQL Third Score", ScoreTotal = 333 });
+            await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), Name = "SQL Fourth Score", ScoreTotal = 444 });
+            await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), Name = "SQL Fifth Score", ScoreTotal = 555 });
+            await AddAsync_Score(new Score { Id = Guid.NewGuid().ToString(), Name = "SQL Sixth Score", ScoreTotal = 666 });
         }
 
         #region Item
@@ -124,42 +124,77 @@ namespace Crawl.Services
 
         public async Task<bool> InsertUpdateAsync_Item(Item data)
         {
-            // Implement
+            // Check to see if the item exist
+            var oldData = await GetAsync_Item(data.Id);
+            if (oldData == null)
+            {
+                await AddAsync_Item(data);
+                return true;
+            }
+
+            // Compare it, if different update in the DB
+            var UpdateResult = await UpdateAsync_Item(data);
+            if (UpdateResult)
+            {
+                await AddAsync_Item(data);
+                return true;
+            }
 
             return false;
         }
 
         public async Task<bool> AddAsync_Item(Item data)
         {
-            // Implement
-
+            var result = await App.Database.InsertAsync(data);
+            if (result == 1)
+            {
+                return true;
+            }
             return false;
         }
 
         public async Task<bool> UpdateAsync_Item(Item data)
         {
-            // Implement
+            var result = await App.Database.UpdateAsync(data);
+            if (result == 1)
+            {
+                return true;
+            }
 
             return false;
         }
 
         public async Task<bool> DeleteAsync_Item(Item data)
         {
-            // Implement
+            var result = await App.Database.DeleteAsync(data);
+            if (result == 1)
+            {
+                return true;
+            }
 
             return false;
         }
 
         public async Task<Item> GetAsync_Item(string id)
         {
-            // Implement
-            return null;
+            var tempResult = await App.Database.GetAsync<Item>(id);
+
+            var result = new Item(tempResult);
+
+            return result;
         }
 
         public async Task<IEnumerable<Item>> GetAllAsync_Item(bool forceRefresh = false)
         {
-            // Implement
-            return null;
+            var tempResult = await App.Database.Table<Item>().ToListAsync();
+
+            var result = new List<Item>();
+            foreach (var item in tempResult)
+            {
+                result.Add(new Item(item));
+            }
+
+            return result;
         }
         #endregion Item
 
@@ -359,35 +394,81 @@ namespace Crawl.Services
         // Score
         public async Task<bool> AddAsync_Score(Score data)
         {
-            // Implement
+            var result = await App.Database.InsertAsync(data);
+            if (result == 1)
+            {
+                return true;
+            }
+
             return false;
         }
 
         public async Task<bool> UpdateAsync_Score(Score data)
         {
-            // Implement
+            var result = await App.Database.UpdateAsync(data);
+            if (result == 1)
+            {
+                return true;
+            }
+
             return false;
         }
 
         public async Task<bool> DeleteAsync_Score(Score data)
         {
-            // Implement
+            var result = await App.Database.DeleteAsync(data);
+            if (result == 1)
+            {
+                return true;
+            }
+
             return false;
         }
 
         public async Task<Score> GetAsync_Score(string id)
         {
-            // Implement
-            return null;
+            var tempResult = await App.Database.GetAsync<Score>(id);
+
+            var result = new Score(tempResult);
+
+            return result;
         }
 
         public async Task<IEnumerable<Score>> GetAllAsync_Score(bool forceRefresh = false)
         {
-            // Implement
-            return null ;
+            var tempResult = await App.Database.Table<Score>().ToListAsync();
 
+            var result = new List<Score>();
+            foreach (var Score in tempResult)
+            {
+                result.Add(new Score(Score));
+            }
+
+            return result;
         }
 
-#endregion Score
+        public async Task<bool> InsertUpdateAsync_Score(Score data)
+        {
+
+            // Check to see if the item exist
+            var oldData = await GetAsync_Score(data.Id);
+            if (oldData == null)
+            {
+                await AddAsync_Score(data);
+                return true;
+            }
+
+            // Compare it, if different update in the DB
+            var UpdateResult = await UpdateAsync_Score(data);
+            if (UpdateResult)
+            {
+                await AddAsync_Score(data);
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion Score
     }
 }

@@ -172,7 +172,7 @@
       <HintPath>..\packages\Xamarin.Forms.3.5.0.129452\lib\netstandard2.0\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core.UnitTests, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.Mocks.3.0.0.2\lib\netstandard2.0\Xamarin.Forms.Core.UnitTests.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.Mocks.3.5.0\lib\netstandard2.0\Xamarin.Forms.Core.UnitTests.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Forms.3.5.0.129452\lib\netstandard2.0\Xamarin.Forms.Platform.dll</HintPath>
@@ -181,18 +181,51 @@
       <HintPath>..\packages\Xamarin.Forms.3.5.0.129452\lib\netstandard2.0\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml.UnitTests, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.Mocks.3.0.0.2\lib\netstandard2.0\Xamarin.Forms.Xaml.UnitTests.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.Mocks.3.5.0\lib\netstandard2.0\Xamarin.Forms.Xaml.UnitTests.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameEngine\BattleEngineTests.cs" />
     <Compile Include="GameEngine\HelperEngineUnitTests.cs" />
+    <Compile Include="GameEngine\RoundEngineTests.cs" />
+    <Compile Include="GameEngine\TurnEngineTests.cs" />
+    <Compile Include="Models\AttributeBaseModelTest.cs" />
+    <Compile Include="Models\AttributeListModelTest.cs" />
+    <Compile Include="Models\CharacterModelTests.cs" />
     <Compile Include="Models\CharacterUnitTests.cs" />
+    <Compile Include="Models\ConverterTests.cs" />
+    <Compile Include="Models\Default\DefaultBaseCharacter.cs" />
+    <Compile Include="Models\Default\DefaultBaseMonster.cs" />
+    <Compile Include="Models\Default\DefaultCharacter.cs" />
+    <Compile Include="Models\Default\DefaultItem.cs" />
+    <Compile Include="Models\Default\DefaultMonster.cs" />
+    <Compile Include="Models\Default\DefaultScore.cs" />
+    <Compile Include="Models\ItemHelper.cs" />
+    <Compile Include="Models\ItemLocationModelTests.cs" />
+    <Compile Include="Models\ItemModelTests.cs" />
+    <Compile Include="Models\MonsterModelTests.cs" />
+    <Compile Include="Models\PlayerInfoModelTests.cs" />
+    <Compile Include="Models\ScoreModelTests.cs" />
+    <Compile Include="Models\VersionGlobalsModelTest.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AboutViewModelTests.cs" />
+    <Compile Include="ViewModels\BaseViewModelTests.cs" />
+    <Compile Include="ViewModels\CharacterDetailViewModelTests.cs" />
+    <Compile Include="ViewModels\CharactersViewModelTests.cs" />
+    <Compile Include="ViewModels\ItemDetailViewModelTests.cs" />
+    <Compile Include="ViewModels\ItemsViewModelTests.cs" />
+    <Compile Include="ViewModels\MonsterDetailViewModelTests.cs" />
+    <Compile Include="ViewModels\MonstersViewModelTests.cs" />
+    <Compile Include="ViewModels\ScoreDetailViewModelTests.cs" />
+    <Compile Include="ViewModels\ScoresViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="..\Crawl\Crawl\Crawl.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
