@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Crawl.Views.ItemEditPage"		     
              xmlns:local="using:Crawl.Models"
+             xmlns:local1="clr-namespace:Crawl.Models"
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
@@ -12,7 +13,7 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:StringEnumConverter x:Key="StringEnum"/>
+            <local1:StringEnumConverter x:Key="StringEnum"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
