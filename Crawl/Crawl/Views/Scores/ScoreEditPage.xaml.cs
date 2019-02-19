@@ -7,11 +7,11 @@ using Xamarin.Forms.Xaml;
 
 namespace Crawl.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ScoreEditPage : ContentPage
-	{
-	    // ReSharper disable once NotAccessedField.Local
-	    private ScoreDetailViewModel _viewModel;
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ScoreEditPage : ContentPage
+    {
+        // ReSharper disable once NotAccessedField.Local
+        private ScoreDetailViewModel _viewModel;
 
         public Score Data { get; set; }
 
@@ -22,7 +22,7 @@ namespace Crawl.Views
             viewModel.Title = "Edit " + viewModel.Title;
 
             InitializeComponent();
-            
+
             // Set the data binding for the page
             BindingContext = _viewModel = viewModel;
         }

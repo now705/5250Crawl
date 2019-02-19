@@ -10,12 +10,12 @@ namespace Crawl.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ScoreDeletePage : ContentPage
 	{
-	    // ReSharper disable once NotAccessedField.Local
-	    private ScoreDetailViewModel _viewModel;
+        // ReSharper disable once NotAccessedField.Local
+        private ScoreDetailViewModel _viewModel;
 
         public Score Data { get; set; }
 
-        public ScoreDeletePage (ScoreDetailViewModel viewModel)
+        public ScoreDeletePage(ScoreDetailViewModel viewModel)
         {
             // Save off the item
             Data = viewModel.Data;
@@ -27,7 +27,7 @@ namespace Crawl.Views
             BindingContext = _viewModel = viewModel;
         }
 
-	    private async void Delete_Clicked(object sender, EventArgs e)
+        private async void Delete_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "DeleteData", Data);
 
@@ -37,7 +37,7 @@ namespace Crawl.Views
             await Navigation.PopAsync();
         }
 
-	    private async void Cancel_Clicked(object sender, EventArgs e)
+        private async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }
