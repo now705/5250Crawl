@@ -130,54 +130,6 @@ namespace Crawl.GameEngine
             return myData;
         }
 
-        public bool AutoBattle()
-        {
-            // Auto Battle, does all the steps that a human would do.
-
-            // Picks 6 Characters
-            if (AddCharactersToBattle() == false)
-            {
-                // Error, so exit...
-                return false;
-            }
-
-            // Start
-            StartBattle(true);
-
-            Debug.WriteLine("Battle Start" + " Characters :" + CharacterList.Count);
-
-            // Initialize the Rounds
-            StartRound();
-
-            RoundEnum RoundResult;
-
-            // Fight Loop. Continue until Game is Over...
-            do
-            {
-                // Do the turn...
-                RoundResult = RoundNextTurn();
-
-                // If the round is over start a new one...
-                if (RoundResult == RoundEnum.NewRound)
-                {
-                    NewRound();
-                    Debug.WriteLine("New Round :" + BattleScore.RoundCount);
-                }
-
-            } while (RoundResult != RoundEnum.GameOver);
-
-            EndBattle();
-
-            Debug.WriteLine(
-                "Battle Ended" +
-                " Total Experience :" + BattleScore.ExperienceGainedTotal +
-                " Rounds :" + BattleScore.RoundCount +
-                " Turns :" + BattleScore.TurnCount +
-                " Monster Kills :" + BattleScore.MonstersKilledList
-                );
-
-            return true;
-        }
 
         // Check Character List, if empty battle over
         // Check Monster List, if empty Round Over, then New Round

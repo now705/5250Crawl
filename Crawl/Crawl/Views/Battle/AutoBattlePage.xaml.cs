@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Crawl.GameEngine;
 using Crawl.ViewModels;
@@ -22,38 +18,28 @@ namespace Crawl.Views.Battle
         private async void AutoBattleButton_Command(object sender, EventArgs e)
         {
             // Can create a new battle engine...
-            var myBattleEngine = new BattleEngine();
+            var myEngine = new AutoBattleEngine();
 
-            var result = myBattleEngine.AutoBattle();
+            var result = myEngine.AutoBattle();
 
             if (result == false)
             {
-                var answer = await DisplayAlert("Error", "No Characters to battle with", "OK","Cancel");
-                if (answer)
-                {
-                    var a = 1;
-                    // Can't run auto battle, no characters...
-                }
+                await DisplayAlert("Error", "No Characters Avaialbe", "OK");
+                return;
             }
 
-            if (myBattleEngine.BattleScore.RoundCount < 1)
+            if (myEngine.BattleEngine.BattleScore.RoundCount < 1)
             {
-                var answer = await DisplayAlert("Error", "No Rounds Fought", "OK", "Cancel");
-                if (answer)
-                {
-                    var a = 1;
-                    // Can't run auto battle, no characters...
-                }
+                await DisplayAlert("Error", "No Rounds Fought", "OK");
+                return;
             }
 
-            var outputString = "Battle Over! Score " + myBattleEngine.BattleScore.ScoreTotal;
-            var action = await DisplayActionSheet(outputString, 
-                "Cancel", 
-                null, 
-                "View Score");
+            var outputString = "Battle Over! Score " + myEngine.BattleEngine.BattleScore.ScoreTotal;
+
+            var action = await DisplayActionSheet(outputString, "Cancel", null, "View Score");
             if (action == "View Score")
             {
-                await Navigation.PushAsync(new ScoreDetailPage(new ScoreDetailViewModel(myBattleEngine.BattleScore)));
+                await Navigation.PushAsync(new ScoreDetailPage(new ScoreDetailViewModel(myEngine.BattleEngine.BattleScore)));
             }
         }
     }
