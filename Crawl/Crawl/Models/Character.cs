@@ -230,6 +230,12 @@ namespace Crawl.Models
             // Increment the Experience
             ExperienceTotal += newExperience;
 
+            // Can't level UP if at max.
+            if (Level == LevelTable.MaxLevel)
+            {
+                return false;
+            }
+
             // Then check for Level UP
             // If experience is higher than the experience at the next level, level up is OK.
             if (ExperienceTotal >= LevelTable.Instance.LevelDetailsList[Level + 1].Experience)
