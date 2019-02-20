@@ -185,6 +185,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameEngine\AutoBattleEngineTests.cs" />
     <Compile Include="GameEngine\BattleEngineTests.cs" />
     <Compile Include="GameEngine\HelperEngineUnitTests.cs" />
     <Compile Include="GameEngine\RoundEngineTests.cs" />

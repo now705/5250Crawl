@@ -188,26 +188,26 @@ namespace UnitTests.GameEngine
         //    Assert.AreNotEqual(string.Empty, Actual.CharacterAtDeathList, "Character List " + TestContext.CurrentContext.Test.Name);
         //}
 
-        [Test]
-        public void BattleEngine_AutoBattle_With_No_Characters_Should_Fail()
-        {
-            MockForms.Init();
+        //[Test]
+        //public void BattleEngine_AutoBattle_With_No_Characters_Should_Fail()
+        //{
+        //    MockForms.Init();
 
-            // Can create a new battle engine...
-            var myBattleEngine = new BattleEngine();
+        //    // Can create a new battle engine...
+        //    var myBattleEngine = new BattleEngine();
 
-            // Clear the dataset...
-            CharactersViewModel.Instance.Dataset.Clear();
+        //    // Clear the dataset...
+        //    CharactersViewModel.Instance.Dataset.Clear();
 
-            var Actual = myBattleEngine.AutoBattle();
-            var Expected = false;
+        //    var Actual = myBattleEngine.AutoBattle();
+        //    var Expected = false;
 
-            // Reset
-            MasterDataStore.ForceDataRestoreAll();
+        //    // Reset
+        //    MasterDataStore.ForceDataRestoreAll();
 
-            Assert.AreEqual(Expected, Actual, TestContext.CurrentContext.Test.Name);
+        //    Assert.AreEqual(Expected, Actual, TestContext.CurrentContext.Test.Name);
 
-        }
+        //}
 
         // TODO Mike
         //[Test]

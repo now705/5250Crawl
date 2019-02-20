@@ -20,7 +20,7 @@ namespace Crawl.Views.Battle
             // Can create a new battle engine...
             var myEngine = new AutoBattleEngine();
 
-            var result = myEngine.AutoBattle();
+            var result = myEngine.RunAutoBattle();
 
             if (result == false)
             {
@@ -28,18 +28,22 @@ namespace Crawl.Views.Battle
                 return;
             }
 
-            if (myEngine.BattleEngine.BattleScore.RoundCount < 1)
+            if (myEngine.GetRoundsValue() < 1)
             {
                 await DisplayAlert("Error", "No Rounds Fought", "OK");
                 return;
             }
 
-            var outputString = "Battle Over! Score " + myEngine.BattleEngine.BattleScore.ScoreTotal;
+            var myResult = myEngine.GetResultsOutput();
+            var myScore = myEngine.GetScoreValue();
+
+            var outputString = "Battle Over! Score " + myScore.ToString();
 
             var action = await DisplayActionSheet(outputString, "Cancel", null, "View Score");
             if (action == "View Score")
             {
-                await Navigation.PushAsync(new ScoreDetailPage(new ScoreDetailViewModel(myEngine.BattleEngine.BattleScore)));
+                var myScoreObject = myEngine.GetScoreObject();
+                await Navigation.PushAsync(new ScoreDetailPage(new ScoreDetailViewModel(myScoreObject)));
             }
         }
     }
