@@ -75,9 +75,6 @@ namespace Crawl.ViewModels
         public void SetNeedsRefresh(bool value)
         {
             _needsRefresh = value;
-
-            // Load Data
-            ExecuteLoadDataCommand().GetAwaiter().GetResult();
         }
 
         // Command that Loads the Data

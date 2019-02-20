@@ -301,25 +301,25 @@ namespace UnitTests.ViewModels
             Assert.AreEqual(Expected, Actual, TestContext.CurrentContext.Test.Name);
         }
 
-        [Test]
-        public void ViewModel_CharactersViewModel_LoadCommand_With_Bogus_DataSource_Should_Throw_Skip()
-        {
+        //[Test]
+        //public void ViewModel_CharactersViewModel_LoadCommand_With_Bogus_DataSource_Should_Throw_Skip()
+        //{
 
-            MockForms.Init();
+        //    MockForms.Init();
 
-            var myData = CharactersViewModel.Instance;
-            var myIsBusy = myData.IsBusy;
+        //    var myData = CharactersViewModel.Instance;
+        //    var myIsBusy = myData.IsBusy;
 
-            // Make the data store null, this will fire the Exception, which then skips...
-            myData.DataStore = null;
-            MasterDataStore.ForceDataRestoreAll();
+        //    // Make the data store null, this will fire the Exception, which then skips...
+        //    myData.DataStore = null;
+        //    MasterDataStore.ForceDataRestoreAll();
 
-            var Actual = myData.Dataset.Count();
-            var Expected = 0;
+        //    var Actual = myData.Dataset.Count();
+        //    var Expected = 0;
 
-            // Validate the controller can stand up and has a Title
-            Assert.AreEqual(Expected, Actual, TestContext.CurrentContext.Test.Name);
-        }
+        //    // Validate the controller can stand up and has a Title
+        //    Assert.AreEqual(Expected, Actual, TestContext.CurrentContext.Test.Name);
+        //}
 
         #endregion LoadRefesh
     }
