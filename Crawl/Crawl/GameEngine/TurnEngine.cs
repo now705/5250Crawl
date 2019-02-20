@@ -411,12 +411,6 @@ namespace Crawl.GameEngine
 
             var myItemsViewModel = ItemsViewModel.Instance;
 
-            //// If no items, exit...
-            //if (myItemsViewModel.Dataset.Count < 1)
-            //{
-            //    return myList;
-            //}
-
             if (myItemsViewModel.Dataset.Count > 0)
             {
                 // Random is enabled so build up a list of items dropped...
@@ -433,6 +427,8 @@ namespace Crawl.GameEngine
                     if (myItem == null)
                     {
                         // Item does not exist, so add it to the datstore
+
+                        // TODO:  Need way to not save the Item
                         ItemsViewModel.Instance.InsertUpdateAsync(item).GetAwaiter().GetResult();
                     }
                     else
