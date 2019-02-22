@@ -107,7 +107,6 @@ namespace UnitTests.GameEngine
 
             // Arrange
             var myEngine = new AutoBattleEngine();
-            string Expected = null;   // because it is not defined yet
 
             // Act
             var Actual = myEngine.GetResultsOutput();
@@ -115,7 +114,7 @@ namespace UnitTests.GameEngine
             // Reset
 
             // Assert
-            Assert.AreEqual(Expected, Actual, TestContext.CurrentContext.Test.Name);
+            Assert.NotNull(Actual, TestContext.CurrentContext.Test.Name);
         }
     }
 }
