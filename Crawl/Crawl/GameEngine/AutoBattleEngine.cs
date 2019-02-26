@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Crawl.GameEngine
 {
-    class AutoBattleEngine
+    public class AutoBattleEngine
     {
         public BattleEngine BattleEngine = new BattleEngine();
 
