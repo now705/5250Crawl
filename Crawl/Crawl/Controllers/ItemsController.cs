@@ -43,7 +43,7 @@ namespace Crawl.Controllers
 
             // Needs to get items from the server
 
-            var URLComponent = "GetItemListPost/";
+            var URLComponent = "GetItemList";
 
             var DataResult = await HttpClientService.Instance.GetJsonGetAsync(WebGlobals.WebSiteAPIURL + URLComponent + parameter);
 
@@ -87,7 +87,7 @@ namespace Crawl.Controllers
 
             // Needs to get items from the server
 
-            var URLComponent = "GetItemListPost/";
+            var URLComponent = "GetItemListPost";
 
             var dict = new Dictionary<string, string>
             {
