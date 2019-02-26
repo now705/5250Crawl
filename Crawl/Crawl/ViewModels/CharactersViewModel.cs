@@ -76,6 +76,15 @@ namespace Crawl.ViewModels
             _needsRefresh = value;
         }
 
+        /// <summary>
+        /// Force the dataset to reload
+        /// Used after clearning the data so it can reset and reload
+        /// </summary>
+        public async void ReloadData()
+        {
+            await ExecuteLoadDataCommand();
+        }
+
         // Command that Loads the Data
         private async Task ExecuteLoadDataCommand()
         {
