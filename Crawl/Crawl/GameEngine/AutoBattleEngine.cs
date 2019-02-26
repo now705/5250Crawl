@@ -38,10 +38,12 @@ namespace Crawl.GameEngine
                 if (RoundResult == RoundEnum.NewRound)
                 {
                     BattleEngine.NewRound();
-                    Debug.WriteLine("New Round :" + BattleEngine.BattleScore.RoundCount);
+                    Debug.WriteLine("Auto Battle New Round :" + BattleEngine.BattleScore.RoundCount);
                 }
 
             } while (RoundResult != RoundEnum.GameOver);
+
+            Debug.WriteLine("Auto Battle Game Over");
 
             //BattleEngine.EndBattle();
 
