@@ -158,8 +158,16 @@ namespace UnitTests.GameEngine
             var myEngine = new AutoBattleEngine();
             bool Expect = true;
 
+            // Need to set the Characters to be really weak so monsters kill them fast
+            // this solvs the problem of the rounds going on forever...
+
+            CharactersViewModel.Instance.Dataset[0].Attribute.CurrentHealth = 1;
+
             // Act
             var Actual = myEngine.RunAutoBattle();
+
+            // Reset
+            CharactersViewModel.Instance.ReloadData();
 
             // Assert
             Assert.AreEqual(Expect, Actual, TestContext.CurrentContext.Test.Name);
