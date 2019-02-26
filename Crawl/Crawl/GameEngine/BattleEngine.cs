@@ -43,8 +43,9 @@ namespace Crawl.GameEngine
             // Get 6 Characters
             do
             {
-                var myData = CharactersViewModel.Instance.Dataset[0];
+                var myData = new Character(CharactersViewModel.Instance.Dataset[0]);
                 CharacterList.Add(myData);
+                Debug.WriteLine("New Character : " + myData.FormatOutput());
             } while (CharacterList.Count < 6);
 
             return true;
