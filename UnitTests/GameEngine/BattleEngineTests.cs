@@ -14,15 +14,92 @@ namespace UnitTests.GameEngine
     [TestFixture]
     public class BattleEngineTests
     {
-        #region BattleBasics
+        #region BattleEngineTDD
+
         [Test]
         public void BattleEngine_Instantiate_Should_Pass()
         {
             // Can create a new battle engine...
+
+            // Arrange
+
+            // Act
             var Actual = new BattleEngine();
+
+            // Assert
             Assert.AreNotEqual(null, Actual, TestContext.CurrentContext.Test.Name);
         }
 
+        [Test]
+        public void BattleEngine_AddCharacter_Should_Create_6_Characters()
+        {
+            // Set a new Battle Engine
+            // Create new Characters, 6 is the default
+
+            // Arrange
+            var myEngine = new BattleEngine();
+            var Expect = 6;
+            
+            // Act
+            myEngine.AddCharactersToBattle();
+            var Actual = myEngine.CharacterList.Count;
+
+            // Assert
+            Assert.AreEqual(Expect, Actual, TestContext.CurrentContext.Test.Name);
+        }
+
+        [Test]
+        public void BattleEngine_AddCharacter_No_Characters_In_ViewModel_Should_Fail()
+        {
+            // Set a new Battle Engine
+            // Create new Characters, 6 is the default
+
+            // Arrange
+            var myEngine = new BattleEngine();
+
+            // Clear the characters in the view model, to cause the list to pull from to be empty
+            MockForms.Init();   //ViewModels need to Mock because of the calls to the messages
+            CharactersViewModel.Instance.Dataset.Clear();
+
+            bool Expect = false;
+
+            // Act
+            var Actual = myEngine.AddCharactersToBattle();
+
+            // Changed system state, so need to restore it.
+            CharactersViewModel.Instance.ReloadData();  
+
+            // Assert
+            Assert.AreEqual(Expect, Actual, TestContext.CurrentContext.Test.Name);
+        }
+
+        [Test]
+        public void BattleEngine_AddCharacter_No_Characters_Should_Fail()
+        {
+            // Set a new Battle Engine
+            // Create new Characters, 6 is the default
+
+            // Arrange
+            var myEngine = new BattleEngine();
+            myEngine.CharacterList.Add(new Character());
+            myEngine.CharacterList.Add(new Character());
+            myEngine.CharacterList.Add(new Character());
+            myEngine.CharacterList.Add(new Character());
+            myEngine.CharacterList.Add(new Character());
+            myEngine.CharacterList.Add(new Character());
+
+            bool Expect = true; // Engine is ready to go...
+
+            // Act
+            var Actual = myEngine.AddCharactersToBattle();
+
+            // Assert
+            Assert.AreEqual(Expect, Actual, TestContext.CurrentContext.Test.Name);
+        }
+
+        #endregion BattleEngineTDD
+
+        #region BattleBasics
         [Test]
         public void BattleEngine_StartBattle_Flag_Should_Pass()
         {

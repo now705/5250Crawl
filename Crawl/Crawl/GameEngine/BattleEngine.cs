@@ -78,6 +78,12 @@ namespace Crawl.GameEngine
         // Scale them to meet Character Strength...
         public bool AddCharactersToBattle()
         {
+            // Check if the Character list is empty
+            if (CharactersViewModel.Instance.Dataset.Count < 1)
+            {
+                return false;
+            }
+
             // Check to see if the Character list is full, if so, no need to add more...
             if (CharacterList.Count >= 6)
             {
@@ -86,20 +92,15 @@ namespace Crawl.GameEngine
 
             // TODO, determine the character strength
             // add Characters up to that strength...
-            var ScaleLevelMax = 2;
-            var ScaleLevelMin = 1;
-
-            if (CharactersViewModel.Instance.Dataset.Count < 1)
-            {
-                return false;
-            }
+            //var ScaleLevelMax = 2;
+            //var ScaleLevelMin = 1;
 
             // Get 6 Characters
             do
             {
-                var myData = GetRandomCharacter(ScaleLevelMin, ScaleLevelMax);
-                CharacterList.Add(myData);
-            } while (CharacterList.Count < 6);
+                //var myData = GetRandomCharacter(ScaleLevelMin, ScaleLevelMax);
+                CharacterList.Add(CharactersViewModel.Instance.Dataset[0]);
+            } while (CharacterList.Count < 6);  //TODO: Changes 6 to be data driven, not hard coded...
 
             return true;
         }
