@@ -28,15 +28,18 @@ namespace UnitTests.GameEngine
         [Test]
         public void RoundEngine_StartRound_Should_Pass()
         {
+            // Arrange
             MockForms.Init();
 
             // Can create a new Round engine...
             var myRoundEngine = new RoundEngine();
-            myRoundEngine.StartRound();
-
-            var Actual = myRoundEngine.BattleScore.RoundCount;
             var Expected = 1;
 
+            // Act
+            myRoundEngine.StartRound();
+            var Actual = myRoundEngine.BattleScore.RoundCount;
+
+            // Assert
             Assert.AreEqual(Expected, Actual, TestContext.CurrentContext.Test.Name);
         }
 
