@@ -179,7 +179,7 @@ namespace Crawl.Services
         {
             var tempResult = await App.Database.GetAsync<Item>(id);
 
-            var result = new Item(tempResult);
+            var result = tempResult;
 
             return result;
         }
@@ -191,7 +191,7 @@ namespace Crawl.Services
             var result = new List<Item>();
             foreach (var item in tempResult)
             {
-                result.Add(new Item(item));
+                result.Add(item);
             }
 
             return result;
@@ -429,7 +429,7 @@ namespace Crawl.Services
         {
             var tempResult = await App.Database.GetAsync<Score>(id);
 
-            var result = new Score(tempResult);
+            var result = tempResult;
 
             return result;
         }
@@ -441,7 +441,7 @@ namespace Crawl.Services
             var result = new List<Score>();
             foreach (var Score in tempResult)
             {
-                result.Add(new Score(Score));
+                result.Add(Score);
             }
 
             return result;
