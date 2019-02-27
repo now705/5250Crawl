@@ -708,6 +708,7 @@ namespace UnitTests.GameEngine
         [Test]
         public void TurnEngine_Turn_AttackChoice_Monster_Valid_Attacker_Valid_Defender_Alive_False_Should_Skip()
         {
+            // Arrange
             var Attacker = DefaultModels.MonsterDefault();
 
             var myDefaultCharacter = new Character(DefaultModels.CharacterDefault());
@@ -718,8 +719,14 @@ namespace UnitTests.GameEngine
             var myTurnEngine = new TurnEngine();
             myTurnEngine.CharacterList.Add(myDefaultCharacter);
 
-            var Actual = myTurnEngine.AttackChoice(Attacker);
             object Expected = null;
+
+            // Act
+            var Actual = myTurnEngine.AttackChoice(Attacker);
+
+            // Reset
+
+            // Assert
 
             Assert.AreEqual(Expected, Actual, TestContext.CurrentContext.Test.Name);
         }

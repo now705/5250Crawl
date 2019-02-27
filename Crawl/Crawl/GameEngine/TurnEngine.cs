@@ -376,13 +376,8 @@ namespace Crawl.GameEngine
                     // Select first one to hit in the list for now...
                     return Defender;
                 }
-
-                if (Defender.Alive == false)
-                {
-                    // Defender is dead, need to remove it from the list, should not have happened...
-                    MonsterList.Remove(Defender);
-                }
             }
+
             return null;
         }
 
@@ -408,12 +403,6 @@ namespace Crawl.GameEngine
                 {
                     // Select first one to hit in the list for now...
                     return Defender;
-                }
-
-                if (Defender.Alive == false)
-                {
-                    // Defender is dead, need to remove it from the list, should not have happened...
-                    CharacterList.Remove(Defender);
                 }
             }
             return null;
