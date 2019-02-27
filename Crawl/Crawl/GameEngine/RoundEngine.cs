@@ -56,6 +56,39 @@ namespace Crawl.GameEngine
             BattleScore.RoundCount++;
         }
 
+        /// <summary>
+        /// Will return the Min, Max, Average for the Characters in the party
+        /// So the monster can get scaled to the appropraite level
+        /// </summary>
+        /// <returns></returns>
+        public int GetAverageCharacterLevel()
+        {
+            var data = CharacterList.Average(m => m.Level);
+            return (int)Math.Floor(data);
+        }
+
+        /// <summary>
+        /// Will return the Min, Max, Average for the Characters in the party
+        /// So the monster can get scaled to the appropraite level
+        /// </summary>
+        /// <returns></returns>
+        public int GetMinCharacterLevel()
+        {
+            var data = CharacterList.Min(m => m.Level);
+            return data;
+        }
+
+        /// <summary>
+        /// Will return the Min, Max, Average for the Characters in the party
+        /// So the monster can get scaled to the appropraite level
+        /// </summary>
+        /// <returns></returns>
+        public int GetMaxCharacterLevel()
+        {
+            var data = CharacterList.Max(m => m.Level);
+            return data;
+        }
+
         // Add Monsters
         // Scale them to meet Character Strength...
         public void AddMonstersToRound()
@@ -67,10 +100,11 @@ namespace Crawl.GameEngine
                 return;
             }
 
-            // TODO, determine the character strength
-            // add monsters up to that strength...
-            var ScaleLevelMax = 2;
-            var ScaleLevelMin = 1;
+            // Scale monsters to be within the range of the Characters
+
+            var ScaleLevelMax = GetMaxCharacterLevel();
+            var ScaleLevelMin = GetMinCharacterLevel();
+            var ScaleLevelAverage = GetAverageCharacterLevel();
 
             // Make Sure Monster List exists and is loaded...
             var myMonsterViewModel = MonstersViewModel.Instance;
@@ -88,7 +122,8 @@ namespace Crawl.GameEngine
                         // Help identify which monster it is...
                         item.Name += " " + (1 + MonsterList.Count()).ToString();
 
-                        var rndScale = HelperEngine.RollDice(ScaleLevelMin, ScaleLevelMax);
+                        // Scale the monster to be between the average level of the characters+1
+                        var rndScale = HelperEngine.RollDice(1, ScaleLevelAverage+1);
                         item.ScaleLevel(rndScale);
                         MonsterList.Add(item);
                     }
