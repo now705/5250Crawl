@@ -11,5 +11,11 @@ namespace Crawl.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        protected override void OnCurrentPageChanged()
+        {
+            base.OnCurrentPageChanged();
+            ((NavigationPage)CurrentPage).PopToRootAsync();
+        }
+    }
 }
