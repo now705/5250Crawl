@@ -1,6 +1,7 @@
 ﻿using System;
 using Crawl.ViewModels;
 using System.Collections.Generic;
+using Crawl.GameEngine;
 
 namespace Crawl.Models
 {
@@ -70,8 +71,33 @@ namespace Crawl.Models
         }
 
         // Upgrades a monster to a set level
-        public void ScaleLevel(int level)
+        public bool ScaleLevel(int level)
         {
+            // Level of < 1 does not need changing
+            if (level < 1)
+            {
+                return false;
+            }
+
+            // Don't exit on same level, because the settings below need to be calculated
+            //// Same level does not need changing
+            //if (level == this.Level)
+            //{
+            //    return false;
+            //}
+
+            // Don't go down in level...
+            if (level < this.Level)
+            {
+                return false;
+            }
+
+            // Level > Max Level
+            if (level > LevelTable.MaxLevel)
+            {
+                return false;
+            }
+
             // Calculate Experience Remaining based on Lookup...
             Level = level;
 
@@ -83,10 +109,13 @@ namespace Crawl.Models
             Attribute.Attack = LevelTable.Instance.LevelDetailsList[Level].Attack;
             Attribute.Defense = LevelTable.Instance.LevelDetailsList[Level].Defense;
             Attribute.Speed = LevelTable.Instance.LevelDetailsList[Level].Speed;
-            Attribute.MaxHealth = 5 * Level;    // 1/2 of what Characters can get per level.. 
+
+            Attribute.MaxHealth = HelperEngine.RollDice(Level, HealthDice);
             Attribute.CurrentHealth = Attribute.MaxHealth;
 
             AttributeString = AttributeBase.GetAttributeString(Attribute);
+
+            return true;
         }
 
         // Update the values passed in
