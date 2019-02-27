@@ -67,11 +67,12 @@ namespace Crawl.Models
                 return false;
             }
 
-            // Same level does not need changing
-            if (level == this.Level)
-            {
-                return false;
-            }
+            // Allow same level to scale to the same, need to calculate values based on level.
+            //// Same level does not need changing
+            //if (level == this.Level)
+            //{
+            //    return false;
+            //}
 
             // Don't go down in level...
             if (level < this.Level)
@@ -88,7 +89,17 @@ namespace Crawl.Models
             // Calculate Experience Remaining based on Lookup...
             Level = level;
 
+            // Get the number of points at the next level, and set it for Experience Total...
+            ExperienceTotal = LevelTable.Instance.LevelDetailsList[Level + 1].Experience;
+
+            Attribute.Attack = LevelTable.Instance.LevelDetailsList[Level].Attack;
+            Attribute.Defense = LevelTable.Instance.LevelDetailsList[Level].Defense;
+            Attribute.Speed = LevelTable.Instance.LevelDetailsList[Level].Speed;
+
             Attribute.MaxHealth = HelperEngine.RollDice(Level, HealthDice);
+            Attribute.CurrentHealth = Attribute.MaxHealth;
+
+            AttributeString = AttributeBase.GetAttributeString(Attribute);
 
             return true;
         }
