@@ -155,11 +155,9 @@ namespace UnitTests.GameEngine
         }
 
         [Test]
-        public void RoundEngine_RoundNextTurn_2Characters_1Monster_Weak_Should_Take_2_Rounds()
+        public void RoundEngine_RoundNextTurn_2Characters_1Monster_Weak_Should_Take_2_Turns()
         {
             MockForms.Init();
-
-            // No characters, so return should be game over...
 
             // Can create a new Round engine...
             var myRoundEngine = new RoundEngine();
@@ -173,7 +171,7 @@ namespace UnitTests.GameEngine
 
             var myMonsterWeak = new Monster(DefaultModels.MonsterDefault());
             myMonsterWeak.ScaleLevel(2);
-            myMonsterWeak.Attribute.CurrentHealth = 11; // need to set to enough to last 2 rounds...
+            myMonsterWeak.Attribute.CurrentHealth = 7; // need to set to enough to last 2 rounds...
 
             myRoundEngine.MonsterList.Add(myMonsterWeak);
 
@@ -210,7 +208,7 @@ namespace UnitTests.GameEngine
         }
 
         [Test]
-        public void RoundEngine_RoundNextTurn_2Characters_1Monster_Strong_Should_Take_3_Rounds()
+        public void RoundEngine_RoundNextTurn_2Characters_1Monster_Strong_Should_Take_4_Turns()
         {
             MockForms.Init();
 
@@ -227,7 +225,7 @@ namespace UnitTests.GameEngine
 
             var myMonsterWeak = new Monster(DefaultModels.MonsterDefault());
             myMonsterWeak.ScaleLevel(2);
-            myMonsterWeak.Attribute.CurrentHealth = 20; // need to set to enough to last 4 rounds...
+            myMonsterWeak.Attribute.CurrentHealth = 10; // need to set to enough to last 4 rounds...
             myRoundEngine.MonsterList.Add(myMonsterWeak);
 
             // Add weak character for first...
