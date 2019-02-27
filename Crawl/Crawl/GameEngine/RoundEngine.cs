@@ -108,9 +108,16 @@ namespace Crawl.GameEngine
             {
                 // Scale monsters to be within the range of the Characters
 
-                var ScaleLevelMax = GetMaxCharacterLevel();
-                var ScaleLevelMin = GetMinCharacterLevel();
-                var ScaleLevelAverage = GetAverageCharacterLevel();
+                var ScaleLevelMax = 1;
+                var ScaleLevelMin = 1;
+                var ScaleLevelAverage = 1;
+
+                if (CharacterList.Any())
+                {
+                    ScaleLevelMax = GetMaxCharacterLevel();
+                    ScaleLevelMin = GetMinCharacterLevel();
+                    ScaleLevelAverage = GetAverageCharacterLevel();
+                }
 
                 // Get 6 monsters
                 do
