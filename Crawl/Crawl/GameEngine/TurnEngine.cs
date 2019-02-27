@@ -368,15 +368,22 @@ namespace Crawl.GameEngine
 
             // For now, just use a simple selection of the first in the list.
             // Later consider, strongest, closest, with most Health etc...
-
             foreach (var Defender in MonsterList)
             {
                 if (Defender.Alive)
                 {
-                    // Select first one to hit in the list for now...
                     return Defender;
                 }
             }
+
+            //// Select first one to hit in the list for now...
+            //// Attack the Weakness (lowest HP) Monster first 
+            //var DefenderWeakest = MonsterList.OrderByDescending(m => m.Attribute.CurrentHealth).FirstOrDefault();
+            //if (DefenderWeakest.Alive)
+            //{
+            //    return DefenderWeakest;
+            //}
+
 
             return null;
         }
