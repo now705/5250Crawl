@@ -385,6 +385,7 @@ namespace UnitTests.GameEngine
         [Test]
         public void RoundEngine_StartRound_Zero_Monsters_Should_Create_6()
         {
+            // Arrange
             MockForms.Init();
 
             // Clear the datastore...
@@ -398,18 +399,20 @@ namespace UnitTests.GameEngine
 
             // Can create a new Round engine...
             var myRoundEngine = new RoundEngine();
-            myRoundEngine.StartRound();
 
-
-            var Actual = myRoundEngine.MonsterList.Count;
             var Expected = 6;
 
+            // Act
+            myRoundEngine.StartRound();
+            var Actual = myRoundEngine.MonsterList.Count;
+
+            // Reset
             // Restore the datastore
             MockDataStore.Instance.InitializeDatabaseNewTables();
 
+            // Assert
             Assert.AreEqual(Expected, Actual, "Monster List" + TestContext.CurrentContext.Test.Name);
             Assert.AreNotEqual(Expected, ListCount, "View Model " + TestContext.CurrentContext.Test.Name);
-
         }
 
         [Test]

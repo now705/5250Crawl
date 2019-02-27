@@ -100,18 +100,18 @@ namespace Crawl.GameEngine
                 return;
             }
 
-            // Scale monsters to be within the range of the Characters
-
-            var ScaleLevelMax = GetMaxCharacterLevel();
-            var ScaleLevelMin = GetMinCharacterLevel();
-            var ScaleLevelAverage = GetAverageCharacterLevel();
-
             // Make Sure Monster List exists and is loaded...
             var myMonsterViewModel = MonstersViewModel.Instance;
             myMonsterViewModel.ForceDataRefresh();
 
             if (myMonsterViewModel.Dataset.Count() > 0)
             {
+                // Scale monsters to be within the range of the Characters
+
+                var ScaleLevelMax = GetMaxCharacterLevel();
+                var ScaleLevelMin = GetMinCharacterLevel();
+                var ScaleLevelAverage = GetAverageCharacterLevel();
+
                 // Get 6 monsters
                 do
                 {
