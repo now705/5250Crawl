@@ -57,6 +57,11 @@ namespace Crawl.GameEngine
             // For Attack, Choose Who
             var Target = AttackChoice(Attacker);
 
+            if (Target == null)
+            {
+                return false;
+            }
+
             // Do Attack
             var AttackScore = Attacker.Level + Attacker.GetAttack();
             var DefenseScore = Target.GetDefense() + Target.Level;
@@ -72,6 +77,11 @@ namespace Crawl.GameEngine
 
             // For Attack, Choose Who
             var Target = AttackChoice(Attacker);
+
+            if (Target == null)
+            {
+                return false;
+            }
 
             // Do Attack
             var AttackScore = Attacker.Level + Attacker.GetAttack();
@@ -246,8 +256,6 @@ namespace Crawl.GameEngine
 
                 var experienceEarned = Target.CalculateExperienceEarned(DamageAmount);
 
-                Target.TakeDamage(DamageAmount);
-
                 var LevelUp = Attacker.AddExperience(experienceEarned);
                 if (LevelUp)
                 {
@@ -263,7 +271,7 @@ namespace Crawl.GameEngine
             // Check for alive
             if (Target.Alive == false)
             {
-                // Remover target from list...
+                // Remove target from list...
                 MonsterList.Remove(Target);
 
                 // Mark Status in output
@@ -368,6 +376,12 @@ namespace Crawl.GameEngine
                     // Select first one to hit in the list for now...
                     return Defender;
                 }
+
+                if (Defender.Alive == false)
+                {
+                    // Defender is dead, need to remove it from the list, should not have happened...
+                    MonsterList.Remove(Defender);
+                }
             }
             return null;
         }
@@ -394,6 +408,12 @@ namespace Crawl.GameEngine
                 {
                     // Select first one to hit in the list for now...
                     return Defender;
+                }
+
+                if (Defender.Alive == false)
+                {
+                    // Defender is dead, need to remove it from the list, should not have happened...
+                    CharacterList.Remove(Defender);
                 }
             }
             return null;
