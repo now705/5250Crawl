@@ -345,8 +345,8 @@ namespace UnitTests.Models
             {
                 Attack = 1,
                 Speed = 1,
-                MaxHealth = 5,
-                CurrentHealth = 5,
+                MaxHealth = 1,
+                CurrentHealth = 1,
                 Defense = 1
             };
 
