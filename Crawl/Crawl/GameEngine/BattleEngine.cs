@@ -92,14 +92,14 @@ namespace Crawl.GameEngine
 
             // TODO, determine the character strength
             // add Characters up to that strength...
-            //var ScaleLevelMax = 2;
-            //var ScaleLevelMin = 1;
+            var ScaleLevelMax = 3;
+            var ScaleLevelMin = 1;
 
             // Get 6 Characters
             do
             {
-                //var myData = GetRandomCharacter(ScaleLevelMin, ScaleLevelMax);
-                CharacterList.Add(CharactersViewModel.Instance.Dataset[0]);
+                var Data = GetRandomCharacter(ScaleLevelMin, ScaleLevelMax);
+                CharacterList.Add(Data);
             } while (CharacterList.Count < 6);  //TODO: Changes 6 to be data driven, not hard coded...
 
             return true;
