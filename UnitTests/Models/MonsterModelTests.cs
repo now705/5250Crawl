@@ -323,9 +323,21 @@ namespace UnitTests.Models
         [Test]
         public void Model_Monster_Monster_From_BaseMonster_Should_Pass()
         {
+            // Arrange
             var myBase = DefaultModels.BaseMonsterDefault();
+
+            // New Monster scales the level, so need to control the random.
+            Crawl.Models.GameGlobals.SetForcedRandomNumbersValue(5);
+
+            // Act
             var Expected = new Monster(myBase);
             var Result = new Monster(myBase);
+
+            // Reset
+            // New Monster scales the level, so need to control the random.
+            Crawl.Models.GameGlobals.DisableRandomValues();
+
+            // Assert
 
             // Check all Monster fields, that come from BaseMonster.
             Assert.AreEqual(Expected.Guid, Result.Guid, "Guid "+TestContext.CurrentContext.Test.Name);
@@ -345,8 +357,8 @@ namespace UnitTests.Models
             {
                 Attack = 1,
                 Speed = 1,
-                MaxHealth = 1,
-                CurrentHealth = 1,
+                MaxHealth = 5,
+                CurrentHealth = 5,
                 Defense = 1
             };
 
