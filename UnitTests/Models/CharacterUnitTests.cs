@@ -63,12 +63,14 @@ namespace UnitTests.Models
         }
 
         [Test]
-        public void Character_ScaleLevel_Same_Level_Should_Fail()
+        public void Character_ScaleLevel_Same_Level_Should_Pass()
         {
+            // Same level is allowed, because it calculates the values.
+
             // Arrange
             var Test = new Character();
             int Level = 2;
-            bool Expected = false;
+            bool Expected = true;
 
             // Set Test level to be 2, Same level should Fail
             Test.Level = Level;
