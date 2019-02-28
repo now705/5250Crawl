@@ -20,6 +20,8 @@ namespace Crawl.GameEngine
 
     public class TurnEngine
     {
+
+        #region Properties
         // Holds the official score
         public Score BattleScore = new Score();
 
@@ -48,6 +50,7 @@ namespace Crawl.GameEngine
         // Death
         // Drop Items
         // Turn Over
+        #endregion Properties
 
         // Character Attacks...
         public bool TakeTurn(Character Attacker)
@@ -366,24 +369,23 @@ namespace Crawl.GameEngine
                 return null;
             }
 
-            // For now, just use a simple selection of the first in the list.
-            // Later consider, strongest, closest, with most Health etc...
-            foreach (var Defender in MonsterList)
-            {
-                if (Defender.Alive)
-                {
-                    return Defender;
-                }
-            }
-
-            //// Select first one to hit in the list for now...
-            //// Attack the Weakness (lowest HP) Monster first 
-            //var DefenderWeakest = MonsterList.OrderByDescending(m => m.Attribute.CurrentHealth).FirstOrDefault();
-            //if (DefenderWeakest.Alive)
+            //// For now, just use a simple selection of the first in the list.
+            //// Later consider, strongest, closest, with most Health etc...
+            //foreach (var Defender in MonsterList)
             //{
-            //    return DefenderWeakest;
+            //    if (Defender.Alive)
+            //    {
+            //        return Defender;
+            //    }
             //}
 
+            // Select first one to hit in the list for now...
+            // Attack the Weakness (lowest HP) Monster first 
+            var DefenderWeakest = MonsterList.OrderBy(m => m.Attribute.CurrentHealth).FirstOrDefault();
+            if (DefenderWeakest.Alive)
+            {
+                return DefenderWeakest;
+            }
 
             return null;
         }
