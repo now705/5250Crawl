@@ -61,17 +61,17 @@ namespace Crawl.ViewModels
             // Load Data
             ExecuteLoadDataCommand().GetAwaiter().GetResult();
 
-            MessagingCenter.Subscribe<BattleCharacterSelect, Character>(this, "AddData", async (obj, data) =>
+            MessagingCenter.Subscribe<BattleCharacterSelectPage, Character>(this, "AddData", async (obj, data) =>
             {
                 Add(data);
             });
 
-            MessagingCenter.Subscribe<BattleCharacterSelect, Character>(this, "EditData", async (obj, data) =>
+            MessagingCenter.Subscribe<BattleCharacterSelectPage, Character>(this, "EditData", async (obj, data) =>
             {
                 Update(data);
             });
 
-            MessagingCenter.Subscribe<BattleCharacterSelect, Character>(this, "DeleteData", async (obj, data) =>
+            MessagingCenter.Subscribe<BattleCharacterSelectPage, Character>(this, "DeleteData", async (obj, data) =>
             {
                 Delete(data);
             });

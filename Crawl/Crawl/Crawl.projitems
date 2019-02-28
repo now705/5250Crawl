@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Battle\BattleCharacterSelect - Copy.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Battle\MonsterListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -90,13 +90,12 @@
       <DependentUpon>AutoBattlePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Battle\BattleCharacterSelect - Copy.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>BattleCharacterSelect.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Battle\BattleCharacterSelect.xaml.cs">
       <DependentUpon>BattleCharacterSelect.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Battle\MonsterListPage.xaml.cs">
+      <DependentUpon>MonsterListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\Battle\OpeningPage.xaml.cs">
       <DependentUpon>OpeningPage.xaml</DependentUpon>

@@ -19,7 +19,7 @@ namespace Crawl.Views.Battle
 
         async void OnNextClicked(object sender, EventArgs args)
         {
-            await Navigation.PushModalAsync(new Battle.BattleCharacterSelect());
+            await Navigation.PushModalAsync(new Battle.BattleCharacterSelectPage());
         }
     }
 }

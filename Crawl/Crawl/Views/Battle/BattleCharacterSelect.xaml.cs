@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Crawl.Views.Battle
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class BattleCharacterSelect : ContentPage
+	public partial class BattleCharacterSelectPage : ContentPage
 	{
-		public BattleCharacterSelect ()
+		public BattleCharacterSelectPage ()
 		{
 			InitializeComponent ();
 		}
