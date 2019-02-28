@@ -134,9 +134,9 @@ namespace Crawl.Models
             ImageURI = newData.ImageURI;
             Alive = newData.Alive;
 
-            // Database information
-            Guid = newData.Guid;
-            Id = newData.Id;
+            //// Database information
+            //Guid = newData.Guid;
+            //Id = newData.Id;
 
             // Populate the Attributes
             AttributeString = newData.AttributeString;

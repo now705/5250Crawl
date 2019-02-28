@@ -2,6 +2,7 @@
 using Crawl.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Crawl.Models
 {
@@ -113,7 +114,7 @@ namespace Crawl.Models
                 return;
             }
 
-            // Update all the fields in the Data, except for the Id
+            // Update all the fields in the Data, except for the Id, and GUID
 
             // Base information
             Name = newData.Name;
@@ -124,8 +125,8 @@ namespace Crawl.Models
             Alive = newData.Alive;
 
             // Database information
-            Guid = newData.Guid;
-            Id = newData.Id;
+            // Guid = newData.Guid;
+            // Id = newData.Id;
 
             // Populate the Attributes
             Attribute = newData.Attribute;
@@ -225,7 +226,7 @@ namespace Crawl.Models
             }
 
             AddExperience(LevelTable.Instance.LevelDetailsList[Value].Experience + 1);
-
+   
             return Level;
         }
 
