@@ -155,6 +155,54 @@ namespace UnitTests.GameEngine
         }
 
         [Test]
+        public void RoundEngine_RoundNextTurn_1Character_1Monster_Strong_Should_be_GameOver()
+        {
+            MockForms.Init();
+
+            // Can create a new Round engine...
+            var myRoundEngine = new RoundEngine();
+
+            // Start
+            myRoundEngine.StartRound();
+
+            // Add moderate monsters
+            // First monster
+            myRoundEngine.MonsterList.Clear();  // start fresh, because it was loaded already with 6...
+
+            var myMonsterWeak = new Monster(DefaultModels.MonsterDefault());
+            myMonsterWeak.ScaleLevel(20);
+            myMonsterWeak.Attribute.CurrentHealth = 700; // need to set to enough to last 2 rounds...
+
+            myRoundEngine.MonsterList.Add(myMonsterWeak);
+
+            // Add weak character for first...
+            var myCharacterStrong = new Character(DefaultModels.CharacterDefault());
+            myCharacterStrong.ScaleLevel(1);
+            myMonsterWeak.Attribute.CurrentHealth = 1; // make weak
+            myRoundEngine.CharacterList.Add(myCharacterStrong);
+
+            // Should be Character 20, Character 10, Monster 5
+
+            // Force rolls to 18 for to hit...
+            // Turn off random numbers
+            GameGlobals.SetForcedRandomNumbersValueAndToHit(1, 18);
+
+            // Character, should kill the monster in the first round.
+            // So the check for the second round will say Round over...
+            var FirstRound = myRoundEngine.RoundNextTurn();     // Monster Goes and Kills Character
+            var Actual = myRoundEngine.RoundNextTurn();         // Over...
+
+            // Reset
+            GameGlobals.ToggleRandomState();
+
+            var Expected = RoundEnum.GameOver;
+
+            Assert.AreEqual(Expected, Actual, "Status " + TestContext.CurrentContext.Test.Name);
+            Assert.AreEqual(1, myRoundEngine.BattleScore.TurnCount, "TurnCount " + TestContext.CurrentContext.Test.Name);
+            Assert.AreEqual(1, myRoundEngine.BattleScore.RoundCount, "RoundCount " + TestContext.CurrentContext.Test.Name);
+        }
+
+        [Test]
         public void RoundEngine_RoundNextTurn_2Characters_1Monster_Weak_Should_Take_2_Turns()
         {
             MockForms.Init();
