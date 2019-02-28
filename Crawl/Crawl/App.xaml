@@ -52,6 +52,14 @@
                 <Setter Property="FontSize" Value="Small" />
             </Style>
 
+            <Style TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                <Setter Property="FontAttributes" Value="None" />
+                <Setter Property="FontSize" Value="Small" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
