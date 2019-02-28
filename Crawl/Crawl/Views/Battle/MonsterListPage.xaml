@@ -1,13 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Crawl.Views.Battle.MonsterListPage">
+             x:Class="Crawl.Views.Battle.MonsterListPage"
+             Title="Monster List">
+    
     <ContentPage.Content>
+    
         <StackLayout>
-            <Label Text="Bring on the Battle"
+            <Label Text="They are excited to meet you"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
+            <StackLayout
+                Orientation="Horizontal"
+                x:Name="MonsterListFrame">
+                
+                
+                
+            </StackLayout>
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>
