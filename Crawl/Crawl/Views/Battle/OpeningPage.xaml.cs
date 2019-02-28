@@ -16,5 +16,10 @@ namespace Crawl.Views.Battle
 		{
 			InitializeComponent ();
 		}
+
+        async void OnCharacterSelectClicked(object sender, EventArgs args)
+        {
+            await Navigation.PushModalAsync(new Battle.BattleCharacterSelect());
+        }
     }
 }

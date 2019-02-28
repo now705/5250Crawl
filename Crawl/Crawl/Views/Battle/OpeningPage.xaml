@@ -27,6 +27,9 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
+
+                <Button Clicked="OnCharacterSelectClicked"
+                        Text="Next"></Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
