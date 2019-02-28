@@ -46,6 +46,9 @@ namespace Crawl.Models
             LevelDetailsList.Add(new LevelDetails(0, 0, 0, 0, 0));
 
             // Character Level Chart...
+
+            // sequence is Level,Experience,Attack,Defense,Speed
+
             LevelDetailsList.Add(new LevelDetails(1, 0, 1, 1, 1));
             LevelDetailsList.Add(new LevelDetails(2, 300, 1, 2, 1));
             LevelDetailsList.Add(new LevelDetails(3, 900, 2, 3, 1));
