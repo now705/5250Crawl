@@ -3,22 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Crawl.Views.Battle.MonsterListPage"
              Title="Monster List">
-    
-    <ContentPage.Content>
-    
-        <StackLayout>
-            <Label Text="They are excited to meet you"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
 
+    <ContentPage.Content>
+
+        <ScrollView>
             <StackLayout
-                Orientation="Horizontal"
-                x:Name="MonsterListFrame">
-                
-                
-                
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand">
+
+                <Label Text="They are excited to meet you"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+
+                <StackLayout
+                VerticalOptions="Center" 
+                HorizontalOptions="FillAndExpand">
+
+                    <FlexLayout x:Name="MonsterListFrame"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Padding="5"/>
+                    
+                </StackLayout>
+
             </StackLayout>
-        </StackLayout>
-        
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
