@@ -17,10 +17,11 @@ namespace Crawl.Views.Battle
 			InitializeComponent ();
 		}
 
+        // Close this page
         async void OnNextClicked(object sender, EventArgs args)
         {
             // Go back a page.
-            await Navigation.PopAsync();
+            await Navigation.PopModalAsync();
         }
 
     }

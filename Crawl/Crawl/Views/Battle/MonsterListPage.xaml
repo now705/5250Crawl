@@ -26,6 +26,8 @@
                     
                 </StackLayout>
 
+                <Button Clicked="OnNextClicked" Text="Next"/>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -28,8 +28,8 @@
                 HorizontalOptions="CenterAndExpand" />
 
 
-                <Button Clicked="OnNextClicked"
-                        Text="Next"></Button>
+                <Button Clicked="OnNextClicked" Text="Next"/>
+
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -102,5 +102,12 @@ namespace Crawl.Views.Battle
                 MonsterListFrame.Children.Add(OuterFrame);
             }
         }
+
+        // Close this page
+        async void OnNextClicked(object sender, EventArgs args)
+        {
+            // Go back a page.
+            await Navigation.PopModalAsync();
+        }
     }
 }

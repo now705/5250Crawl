@@ -8,6 +8,8 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
+            <Button Clicked="OnNextClicked" Text="Next"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
